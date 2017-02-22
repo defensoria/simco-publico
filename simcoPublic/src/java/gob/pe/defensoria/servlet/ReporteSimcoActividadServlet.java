@@ -5,7 +5,6 @@
  */
 package gob.pe.defensoria.servlet;
 
-import gob.pe.defensoria.dto.CasoDTO;
 import gob.pe.defensoria.reporte.ReporteSimcoActividad;
 import gob.pe.defensoria.service.SimcoService;
 import gob.pe.defensoria.util.ConstantesUtil;
@@ -18,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -99,11 +100,11 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
             request.setAttribute("datatable", "");
         }
         if(StringUtils.equals(tipoReporte, "1")){
-            reporteSimcoActividadExcel(rsa, response);
+            reporteSimcoActividadExcel(rsa, response, request);
             return;
         }
         if(StringUtils.equals(tipoReporte, "2")){
-            reporteSimcoActividadPdf(rsa, response);
+            reporteSimcoActividadPdf(rsa, response, request);
             return;
         }
         request.setAttribute("selectAnho", selectAnho);
@@ -449,11 +450,11 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
         request.setAttribute("listaCasos", lista);
     }*/
     
-    private void reporteSimcoActividadExcel(ReporteSimcoActividad reporteSimcoActividadModel, HttpServletResponse httpServletResponse) throws JRException, IOException {
+    private void reporteSimcoActividadExcel(ReporteSimcoActividad reporteSimcoActividadModel, HttpServletResponse httpServletResponse, HttpServletRequest request) throws JRException, IOException {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = simpleDateFormat.format(date);
-        initJasperSimcoActividad(reporteSimcoActividadModel, 1);
+        initJasperSimcoActividad(reporteSimcoActividadModel, 1, request);
         httpServletResponse.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         httpServletResponse.addHeader("Content-disposition", "attachment; filename=" + fecha + "_reporteActividad.xlsx");
         ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
@@ -468,11 +469,11 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
         jrXlsxExporter.exportReport();
     }
     
-    public void reporteSimcoActividadPdf(ReporteSimcoActividad reporteSimcoActividadModel, HttpServletResponse httpServletResponse) throws JRException, IOException {
+    public void reporteSimcoActividadPdf(ReporteSimcoActividad reporteSimcoActividadModel, HttpServletResponse httpServletResponse, HttpServletRequest request) throws JRException, IOException {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String fecha = simpleDateFormat.format(date);
-        initJasperSimcoActividad(reporteSimcoActividadModel, 2);
+        initJasperSimcoActividad(reporteSimcoActividadModel, 2, request);
         httpServletResponse.setContentType("application/pdf");
         httpServletResponse.addHeader("Content-disposition", "attachment; filename=" + fecha + "_reporteSimcoActividad.pdf");
         ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
@@ -480,13 +481,35 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
         
     }
     
-    private void initJasperSimcoActividad(ReporteSimcoActividad reporteSimcoActividadModel, int tipo) throws JRException {
+    private void initJasperSimcoActividad(ReporteSimcoActividad reporteSimcoActividadModel, int tipo, HttpServletRequest request) throws JRException {
         List<ReporteSimcoActividad> lista = listarSimcoActividad(reporteSimcoActividadModel);
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lista);
         if(tipo == 1)
-            jasperPrint = JasperFillManager.fillReport(ConstantesUtil.BASE_URL_REPORT + "reporteSimcoActividadPortal.jasper", new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoActividadPortal.jasper") , new HashMap(), beanCollectionDataSource);
         else
-            jasperPrint = JasperFillManager.fillReport(ConstantesUtil.BASE_URL_REPORT + "reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoActividadPortalPDF.jasper"), new HashMap(), beanCollectionDataSource);
+    }
+    
+    //protected String separador = "/"; //linux
+    protected String separador = "\\"; //windows
+
+    //protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
+    protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
+    
+    public String retornapath(String cadena) {
+        int cont = 0;
+        for (int i = 0; i < cadena.length(); i++) {
+            if (separador.equals(cadena.substring(i, i + 1))) {
+                cont = i;
+            }
+        }
+        return cadena.substring(0, cont);
+    }
+
+    public String retornaRutaPath(HttpServletRequest request) {
+        String path = request.getRealPath(separador);
+        System.out.println(path);
+        return retornapath(retornapath(path));
     }
     
     private List<ReporteSimcoActividad> listarSimcoActividad(ReporteSimcoActividad reporteSimcoActividadModel) {

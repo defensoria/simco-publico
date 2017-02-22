@@ -101,11 +101,11 @@ public class ReporteSimcoActorServlet extends HttpServlet {
             request.setAttribute("datatable", "");
         }
         if(StringUtils.equals(tipoReporte, "1")){
-            reporteSimcoActorExcel(rsa, response);
+            reporteSimcoActorExcel(rsa, response, request);
             return;
         }
         if(StringUtils.equals(tipoReporte, "2")){
-            reporteSimcoActorPdf(rsa, response);
+            reporteSimcoActorPdf(rsa, response, request);
             return;
         }
         request.setAttribute("selectAnho", selectAnho);
@@ -220,11 +220,11 @@ public class ReporteSimcoActorServlet extends HttpServlet {
         return sb.toString();
     }
     
-    private void reporteSimcoActorExcel(ReporteSimcoActor reporteSimcoActorModel, HttpServletResponse httpServletResponse) throws JRException, IOException {
+    private void reporteSimcoActorExcel(ReporteSimcoActor reporteSimcoActorModel, HttpServletResponse httpServletResponse,  HttpServletRequest request) throws JRException, IOException {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = simpleDateFormat.format(date);
-        initJasperSimcoActor(reporteSimcoActorModel, 1);
+        initJasperSimcoActor(reporteSimcoActorModel, 1, request);
         httpServletResponse.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         httpServletResponse.addHeader("Content-disposition", "attachment; filename=" + fecha + "_reporteActor.xlsx");
         ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
@@ -239,11 +239,11 @@ public class ReporteSimcoActorServlet extends HttpServlet {
         jrXlsxExporter.exportReport();
     }
     
-    public void reporteSimcoActorPdf(ReporteSimcoActor reporteSimcoActorModel, HttpServletResponse httpServletResponse) throws JRException, IOException {
+    public void reporteSimcoActorPdf(ReporteSimcoActor reporteSimcoActorModel, HttpServletResponse httpServletResponse, HttpServletRequest request) throws JRException, IOException {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String fecha = simpleDateFormat.format(date);
-        initJasperSimcoActor(reporteSimcoActorModel, 2);
+        initJasperSimcoActor(reporteSimcoActorModel, 2,request);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         httpServletResponse.setContentType("application/pdf");
         httpServletResponse.addHeader("Content-disposition", "attachment; filename=" + fecha + "_reporteSimcoActividad.pdf");
@@ -253,13 +253,35 @@ public class ReporteSimcoActorServlet extends HttpServlet {
         facesContext.renderResponse();
     }
     
-    private void initJasperSimcoActor(ReporteSimcoActor reporteSimcoActorModel, int tipo) throws JRException {
+    private void initJasperSimcoActor(ReporteSimcoActor reporteSimcoActorModel, int tipo,HttpServletRequest request) throws JRException {
         List<ReporteSimcoActor> lista = listarSimcoActor(reporteSimcoActorModel);
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lista);
         if(tipo == 1)
-            jasperPrint = JasperFillManager.fillReport(ConstantesUtil.BASE_URL_REPORT + "reporteSimcoActorPortal.jasper", new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoActorPortal.jasper"), new HashMap(), beanCollectionDataSource);
         else
-            jasperPrint = JasperFillManager.fillReport(ConstantesUtil.BASE_URL_REPORT + "reporteSimcoActorPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoActorPortalPDF.jasper"), new HashMap(), beanCollectionDataSource);
+    }
+    
+    //protected String separador = "/"; //linux
+    protected String separador = "\\"; //windows
+
+    //protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
+    protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
+    
+    public String retornapath(String cadena) {
+        int cont = 0;
+        for (int i = 0; i < cadena.length(); i++) {
+            if (separador.equals(cadena.substring(i, i + 1))) {
+                cont = i;
+            }
+        }
+        return cadena.substring(0, cont);
+    }
+
+    public String retornaRutaPath(HttpServletRequest request) {
+        String path = request.getRealPath(separador);
+        System.out.println(path);
+        return retornapath(retornapath(path));
     }
     
     public List<ReporteSimcoActor> listarSimcoActor(ReporteSimcoActor reporteSimcoActor) {

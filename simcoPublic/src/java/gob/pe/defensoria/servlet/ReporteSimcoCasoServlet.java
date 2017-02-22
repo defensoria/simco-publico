@@ -14,12 +14,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.spi.http.HttpContext;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -52,6 +55,7 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println(request.getRealPath(separador)); 
         response.setContentType("text/html;charset=UTF-8");
         request.setAttribute("listaAnhos", service.cargarAnho());
         request.setAttribute("listaTipoCaso", service.cargarTipoDocumento("90"));
@@ -92,11 +96,11 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
                 request.setAttribute("datatable", "");
             }
             if (StringUtils.equals(tipoReporte, "1")) {
-                reporteSimcoCasoExcel(rsa, response);
+                reporteSimcoCasoExcel(rsa, response, request);
                 return;
             }
             if (StringUtils.equals(tipoReporte, "2")) {
-                reporteSimcoCasoPdf(rsa, response);
+                reporteSimcoCasoPdf(rsa, response, request);
                 return;
             }
             request.setAttribute("selectAnho", selectAnho);
@@ -145,11 +149,11 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
         return sb.toString();
     }
 
-    private void reporteSimcoCasoExcel(ReporteSimcoCaso reporteSimcoCasoModel, HttpServletResponse httpServletResponse) throws JRException, IOException {
+    private void reporteSimcoCasoExcel(ReporteSimcoCaso reporteSimcoCasoModel, HttpServletResponse httpServletResponse, HttpServletRequest request) throws JRException, IOException {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = simpleDateFormat.format(date);
-        initJasperSimcoCaso(reporteSimcoCasoModel, 1);
+        initJasperSimcoCaso(reporteSimcoCasoModel, 1, request);
         httpServletResponse.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         httpServletResponse.addHeader("Content-disposition", "attachment; filename=" + fecha + "_reporteCaso.xlsx");
         ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
@@ -164,24 +168,47 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
         jrXlsxExporter.exportReport();
     }
 
-    public void reporteSimcoCasoPdf(ReporteSimcoCaso reporteSimcoCasoModel, HttpServletResponse httpServletResponse) throws JRException, IOException {
+    public void reporteSimcoCasoPdf(ReporteSimcoCaso reporteSimcoCasoModel, HttpServletResponse httpServletResponse, HttpServletRequest request) throws JRException, IOException {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String fecha = simpleDateFormat.format(date);
-        initJasperSimcoCaso(reporteSimcoCasoModel, 2);
+        initJasperSimcoCaso(reporteSimcoCasoModel, 2, request);
         httpServletResponse.setContentType("application/pdf");
         httpServletResponse.addHeader("Content-disposition", "attachment; filename=" + fecha + "_reporteCaso.pdf");
         ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
         JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+        
     }
 
-    private void initJasperSimcoCaso(ReporteSimcoCaso reporteSimcoActividadModel, int tipo) throws JRException {
+    private void initJasperSimcoCaso(ReporteSimcoCaso reporteSimcoActividadModel, int tipo, HttpServletRequest request) throws JRException {
         List<ReporteSimcoCaso> lista = listarSimcoCaso(reporteSimcoActividadModel);
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lista);
         //if(tipo == 1)
-        jasperPrint = JasperFillManager.fillReport(ConstantesUtil.BASE_URL_REPORT + "reporteSimcoCasoPortal.jasper", new HashMap(), beanCollectionDataSource);
+        jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoCasoPortal.jasper"), new HashMap(), beanCollectionDataSource);
         /*else
          jasperPrint = JasperFillManager.fillReport(ConstantesUtil.BASE_URL_REPORT + "reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);*/
+    }
+    
+    //protected String separador = "/"; //linux
+    protected String separador = "\\"; //windows
+
+    //protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
+    protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
+    
+    public String retornapath(String cadena) {
+        int cont = 0;
+        for (int i = 0; i < cadena.length(); i++) {
+            if (separador.equals(cadena.substring(i, i + 1))) {
+                cont = i;
+            }
+        }
+        return cadena.substring(0, cont);
+    }
+
+    public String retornaRutaPath(HttpServletRequest request) {
+        String path = request.getRealPath(separador);
+        System.out.println(path);
+        return retornapath(retornapath(path));
     }
 
     private List<ReporteSimcoCaso> listarSimcoCaso(ReporteSimcoCaso reporteSimcoCasoModel) {
