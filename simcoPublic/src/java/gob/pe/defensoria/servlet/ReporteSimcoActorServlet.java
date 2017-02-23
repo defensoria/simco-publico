@@ -262,11 +262,11 @@ public class ReporteSimcoActorServlet extends HttpServlet {
             jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoActorPortalPDF.jasper"), new HashMap(), beanCollectionDataSource);
     }
     
-    //protected String separador = "/"; //linux
-    protected String separador = "\\"; //windows
+    protected String separador = "/"; //linux
+    //protected String separador = "\\"; //windows
 
-    //protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
-    protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
+    protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
+    //protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
     
     public String retornapath(String cadena) {
         int cont = 0;
