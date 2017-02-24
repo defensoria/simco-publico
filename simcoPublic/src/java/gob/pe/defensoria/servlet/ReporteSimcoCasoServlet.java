@@ -7,22 +7,17 @@ package gob.pe.defensoria.servlet;
 
 import gob.pe.defensoria.reporte.ReporteSimcoCaso;
 import gob.pe.defensoria.service.SimcoService;
-import gob.pe.defensoria.util.ConstantesUtil;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.spi.http.HttpContext;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -184,16 +179,19 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
         List<ReporteSimcoCaso> lista = listarSimcoCaso(reporteSimcoActividadModel);
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lista);
         //if(tipo == 1)
+        //windows
         jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoCasoPortal.jasper"), new HashMap(), beanCollectionDataSource);
+        //linux
+        //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoCasoPortal.jasper", new HashMap(), beanCollectionDataSource);
         /*else
          jasperPrint = JasperFillManager.fillReport(ConstantesUtil.BASE_URL_REPORT + "reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);*/
     }
     
-    protected String separador = "/"; //linux
-    //protected String separador = "\\"; //windows
+    //protected String separador = "/"; //linux
+    protected String separador = "\\"; //windows
 
-    protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
-    //protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
+    //protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
+    protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
     
     public String retornapath(String cadena) {
         int cont = 0;

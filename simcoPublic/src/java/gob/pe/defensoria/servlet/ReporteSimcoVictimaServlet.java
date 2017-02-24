@@ -7,7 +7,6 @@ package gob.pe.defensoria.servlet;
 
 import gob.pe.defensoria.reporte.ReporteSimcoVictima;
 import gob.pe.defensoria.service.SimcoService;
-import gob.pe.defensoria.util.ConstantesUtil;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -336,10 +335,16 @@ public class ReporteSimcoVictimaServlet extends HttpServlet {
     private void initJasperSimcoVictima(ReporteSimcoVictima reporteSimcoVictimaModel, int tipo, HttpServletRequest request) throws JRException {
         List<ReporteSimcoVictima> lista = listarSimcoVictima(reporteSimcoVictimaModel);
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lista);
-        if(tipo == 1)
-            jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoVictimaPortal.jasper"), new HashMap(), beanCollectionDataSource);
-        else
-            jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoVictimaPortalPDF.jasper"), new HashMap(), beanCollectionDataSource);
+        String path = request.getRealPath(separador);
+        if(tipo == 1){
+            jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoVictimaPortal.jasper", new HashMap(), beanCollectionDataSource);
+            //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoVictimaPortal.jasper", new HashMap(), beanCollectionDataSource);
+        }    
+        else{
+            jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoVictimaPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+            //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoVictimaPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+        }
+            
     }
     
     protected String separador = "/"; //linux

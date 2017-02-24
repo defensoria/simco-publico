@@ -7,7 +7,6 @@ package gob.pe.defensoria.servlet;
 
 import gob.pe.defensoria.reporte.ReporteSimcoActividad;
 import gob.pe.defensoria.service.SimcoService;
-import gob.pe.defensoria.util.ConstantesUtil;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,8 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -423,32 +420,6 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
         }
         return null;
     }
-    /*
-    public void listaCasos(Integer pagina, String nombre, HttpServletRequest request) {
-        int paginado = 3;
-        Integer ini = paginado * (pagina - 1) + 1;
-        Integer fin = paginado * pagina;
-        if (pagina == 0) {
-            ini = 1;
-            fin = 5;
-            pagina = 1;
-        }
-        Filtro filtroCaso = new Filtro();
-        filtroCaso.setIni(ini);
-        filtroCaso.setFin(fin);
-        filtroCaso.setNombre(nombre);
-        List<CasoDTO> lista = null;
-        try {
-            lista = service.buscarCasoXnombreCodigo(filtroCaso);
-            /*if (lista.size() > 0) {
-                listadoCasos = lista;
-                nroPagina = pagina;
-            }*/
-       /* } catch (Exception e) {
-            e.printStackTrace();
-        }
-        request.setAttribute("listaCasos", lista);
-    }*/
     
     private void reporteSimcoActividadExcel(ReporteSimcoActividad reporteSimcoActividadModel, HttpServletResponse httpServletResponse, HttpServletRequest request) throws JRException, IOException {
         Date date = new Date();
@@ -484,12 +455,25 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
     private void initJasperSimcoActividad(ReporteSimcoActividad reporteSimcoActividadModel, int tipo, HttpServletRequest request) throws JRException {
         List<ReporteSimcoActividad> lista = listarSimcoActividad(reporteSimcoActividadModel);
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lista);
-        if(tipo == 1)
-            jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoActividadPortal.jasper") , new HashMap(), beanCollectionDataSource);
-        else
-            jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoActividadPortalPDF.jasper"), new HashMap(), beanCollectionDataSource);
+        String path = request.getRealPath(separador);
+        if(tipo == 1){
+            //WINDOWS
+            jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortal.jasper" , new HashMap(), beanCollectionDataSource);
+            //linux
+            //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortal.jasper", new HashMap(), beanCollectionDataSource);
+        }
+            
+        else{
+            //WINDOWS
+            jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+            //linux
+            //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+            
+        }
+            
     }
     
+        
     protected String separador = "/"; //linux
     //protected String separador = "\\"; //windows
 
