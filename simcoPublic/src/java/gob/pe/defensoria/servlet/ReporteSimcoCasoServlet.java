@@ -180,11 +180,10 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lista);
         //if(tipo == 1)
         //windows
-        jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoCasoPortal.jasper"), new HashMap(), beanCollectionDataSource);
+        //jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoCasoPortal.jasper"), new HashMap(), beanCollectionDataSource);
         //linux
-        //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoCasoPortal.jasper", new HashMap(), beanCollectionDataSource);
-        /*else
-         jasperPrint = JasperFillManager.fillReport(ConstantesUtil.BASE_URL_REPORT + "reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);*/
+        jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoCasoPortal.jasper", new HashMap(), beanCollectionDataSource);
+        
     }
     
     //protected String separador = "/"; //linux

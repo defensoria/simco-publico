@@ -458,16 +458,16 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
         String path = request.getRealPath(separador);
         if(tipo == 1){
             //WINDOWS
-            jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortal.jasper" , new HashMap(), beanCollectionDataSource);
+            //jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortal.jasper" , new HashMap(), beanCollectionDataSource);
             //linux
-            //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortal.jasper", new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortal.jasper", new HashMap(), beanCollectionDataSource);
         }
             
         else{
             //WINDOWS
-            jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+            //jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
             //linux
-            //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
             
         }
             
