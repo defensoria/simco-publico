@@ -47,26 +47,15 @@ public class ReporteSimcoInicioServlet extends HttpServlet {
     private void cargarGraficos003(HttpServletRequest request, String anho) {
         try {
             StringBuilder sb = new StringBuilder();
-            Map<Integer, String> map = service.contadorCasosEstado("01", anho);
-            for (Integer key : map.keySet()) {
-                sb.append("{'period': '").append(map.get(key)).append("', 'Borrador de propuesta': ").append(key).append("},");
+            Map<String, Integer> map2 = service.contadorCasosEstado("04", anho);
+            for (String key : map2.keySet()) {
+                sb.append("{'period': '").append(key).append("', 'Activo': ").append(map2.get(key)).append("},");
             }
-            Map<Integer, String> map1 = service.contadorCasosEstado("02", anho);
-            for (Integer key : map1.keySet()) {
-                sb.append("{'period': '").append(map1.get(key)).append("', 'Propuesta': ").append(key).append("},");
+            Map<String, Integer> map3 = service.contadorCasosEstado("05", anho);
+            for (String key : map3.keySet()) {
+                sb.append("{'period': '").append(key).append("', 'Latente': ").append(map2.get(key)).append("},");
             }
-            Map<Integer, String> map2 = service.contadorCasosEstado("04", anho);
-            for (Integer key : map2.keySet()) {
-                sb.append("{'period': '").append(map2.get(key)).append("', 'Activo': ").append(key).append("},");
-            }
-            Map<Integer, String> map3 = service.contadorCasosEstado("05", anho);
-            for (Integer key : map3.keySet()) {
-                sb.append("{'period': '").append(map3.get(key)).append("', 'Latente': ").append(key).append("},");
-            }
-            Map<Integer, String> map4 = service.contadorCasosEstado("06", anho);
-            for (Integer key : map4.keySet()) {
-                sb.append("{'period': '").append(map4.get(key)).append("', 'Resuelto': ").append(key).append("},");
-            }
+            
             
             request.setAttribute("grafica", sb.toString());
             request.setAttribute("anho", anho);

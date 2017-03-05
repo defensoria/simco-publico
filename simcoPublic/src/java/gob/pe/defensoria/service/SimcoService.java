@@ -286,11 +286,11 @@ public class SimcoService {
         return simcoFacade.contarActorAcontecimiento(idActor);
     }
     
-    public Map<Integer, String> contadorCasosEstado(String estadoCaso, String anho){
+    public Map<String, Integer> contadorCasosEstado(String estadoCaso, String anho){
         List<Object[]> lista = simcoFacade.contadorCasosEstado(estadoCaso, anho);
-        Map<Integer, String> map = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>();
         for(Object[] ob : lista){
-            map.put(Integer.parseInt(ob[0].toString()), ob[1].toString());
+            map.put(ob[1].toString(), Integer.parseInt(ob[0].toString()));
         }
         return map;
     }

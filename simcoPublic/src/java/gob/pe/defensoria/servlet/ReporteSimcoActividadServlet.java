@@ -113,7 +113,7 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
             request.setAttribute("selectTipoAcontecimiento", selectTipoAcontecimiento);
             request.setAttribute("selectTipoActor", selectTipoActor);
         request.getRequestDispatcher("/reporteSimcoActividad.jsp").forward(request, response);
-        } catch (Exception e) {
+        } catch (IOException | ServletException | JRException e) {
             e.printStackTrace();
         }
 
@@ -467,10 +467,8 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
             //WINDOWS
             //jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
             //linux
-            jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
-            
+            jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);   
         }
-            
     }
     
         

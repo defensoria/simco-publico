@@ -124,8 +124,8 @@
                                             element: 'graph3',
                                             data: month_data,
                                             xkey: 'period',
-                                            ykeys: ['Borrador de propuesta', 'Propuesta', 'Activo', 'Latente', 'Resuelto'],
-                                            labels: ['Borrador de propuesta', 'Propuesta', 'Activo', 'Latente', 'Resuelto'],
+                                            ykeys: ['Activo', 'Latente'],
+                                            labels: ['Activo', 'Latente'],
                                             smooth: false
                                         });
                                     });

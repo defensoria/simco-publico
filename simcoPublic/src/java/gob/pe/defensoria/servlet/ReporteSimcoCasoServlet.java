@@ -178,7 +178,6 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
     private void initJasperSimcoCaso(ReporteSimcoCaso reporteSimcoActividadModel, int tipo, HttpServletRequest request) throws JRException {
         List<ReporteSimcoCaso> lista = listarSimcoCaso(reporteSimcoActividadModel);
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lista);
-        //if(tipo == 1)
         //windows
         //jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoCasoPortal.jasper"), new HashMap(), beanCollectionDataSource);
         //linux
@@ -186,11 +185,11 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
         
     }
     
-    //protected String separador = "/"; //linux
-    protected String separador = "\\"; //windows
+    protected String separador = "/"; //linux
+    //protected String separador = "\\"; //windows
 
-    //protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
-    protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
+    protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
+    //protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
     
     public String retornapath(String cadena) {
         int cont = 0;
