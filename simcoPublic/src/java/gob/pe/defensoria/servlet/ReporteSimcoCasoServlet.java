@@ -179,17 +179,17 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
         List<ReporteSimcoCaso> lista = listarSimcoCaso(reporteSimcoActividadModel);
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lista);
         //windows
-        jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoCasoPortal.jasper"), new HashMap(), beanCollectionDataSource);
+        //jasperPrint = JasperFillManager.fillReport(retornaRutaPath(request).concat("/web/jasper/reporteSimcoCasoPortal.jasper"), new HashMap(), beanCollectionDataSource);
         //linux
-        //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoCasoPortal.jasper", new HashMap(), beanCollectionDataSource);
+        jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoCasoPortal.jasper", new HashMap(), beanCollectionDataSource);
         
     }
     
-    //protected String separador = "/"; //linux
-    protected String separador = "\\"; //windows
+    protected String separador = "/"; //linux
+    //protected String separador = "\\"; //windows
 
-    //protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
-    protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
+    protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
+    //protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
     
     public String retornapath(String cadena) {
         int cont = 0;
