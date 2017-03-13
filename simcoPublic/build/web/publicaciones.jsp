@@ -1895,10 +1895,10 @@ Comisión Andina de Juristas <br>
                                 Miércoles, 22 de Julio de 2015</div>
                         </li>
                     </ul>
-                    <p class="link-ver"><a href="#"><i class="fa fa-arrow-right"></i>  Ver todos</a></p>
+                    <p class="link-ver"><a target="_blank" href="http://www.defensoria.gob.pe/temas.php?des=3#r"><i class="fa fa-arrow-right"></i>  Ver todos</a></p>
                 </div>
                 <div class="col-md-4">
-                    <h4>Suscríbete al Boletín</h4>
+                    <h4>Suscríbete al boletín</h4>
                     <form id="form">
                         <div class="input-group mb-md">
                             <span class="input-group-addon" style="font-size: 10px">

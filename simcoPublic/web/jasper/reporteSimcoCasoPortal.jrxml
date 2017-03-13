@@ -205,7 +205,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Indicador de participación de comunidades nativas]]></text>
+				<text><![CDATA[Indicador de participación de pueblos indígenas]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="321" y="38" width="89" height="50" forecolor="#FFFFFF" backcolor="#0066CC" uuid="b7e8e55e-487e-4b52-ad6d-d07151131531"/>

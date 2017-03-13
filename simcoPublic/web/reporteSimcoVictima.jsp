@@ -75,7 +75,7 @@
                         <li><a href="reporteSimcoActividad">Acontecimientos y actuaciones defensoriales</a></li>
                         <li><a href="reporteSimcoActor">Actores</a></li>
                         <li><a href="reporteSimcoVictima">Víctimas de la violencia</a></li>
-                        <li><a href="publicaciones.jsp">Publicaciones</a></li>
+                        <li><a target="_blank" href="http://www.defensoria.gob.pe/temas.php?des=3#r">Publicaciones</a></li>
                         <li><a href="#">Sobre SIMCO</a></li>
                     </ul>
                 </div>
@@ -122,7 +122,7 @@
                                         <table style="width:100%">
                                             <tr>
                                                 <td style="width:40%">
-                                                    <span style="color: red; font-size: 150%">*</span><b>Año de Registro:</b>
+                                                    <span style="color: red; font-size: 150%">*</span><b>Año de registro:</b>
                                                 </td>
                                                 <td>
                                                     <select id="selectAnho" name="selectAnho" class="form-control simcoSelect">
@@ -242,7 +242,6 @@
                                                 <div class="lateral youtube">
                                                     <h3>Canal <i class="fa fa-youtube fa-lg"></i></h3>
                                                     <p><iframe width="100%" height="205" src="https://www.youtube.com/embed/AJiNSWsP9Gk?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>
-                                                    <iframe width="100%" height="205" src="https://www.youtube.com/embed/videoseries?list=PLO9TD_9AB8_M3H62phadMcncaiZgK8FdX" frameborder="0" allowfullscreen></iframe>
                                                 </div>
                                             </aside>
                                         </td>
@@ -684,7 +683,7 @@
                     <div class="modal-content" style=" background: #FCF8E3">
                         <div class="modal-header" style="padding: 5px;">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="color: black; font-size: large" ></span></button>
-                            <h4 style="color: #8A6D3B"><b>Alerta!</b></h4>
+                            <h4 style="color: #8A6D3B"><b>!Alerta!</b></h4>
                         </div>
                         <div style="background: white;box-sizing: border-box;" >
                             <div class="modal-body" style="padding: 7px;">
@@ -750,10 +749,10 @@
                                 Miércoles, 22 de Julio de 2015</div>
                         </li>
                     </ul>
-                    <p class="link-ver"><a href="#"><i class="fa fa-arrow-right"></i>  Ver todos</a></p>
+                    <p class="link-ver"><a target="_blank" href="http://www.defensoria.gob.pe/temas.php?des=3#r"><i class="fa fa-arrow-right"></i>  Ver todos</a></p>
                 </div>
                 <div class="col-md-4">
-                    <h4>Suscríbete al Boletín</h4>
+                    <h4>Suscríbete al boletín</h4>
                     <form id="form">
                         <div class="input-group mb-md">
                             <span class="input-group-addon" style="font-size: 10px">
@@ -824,7 +823,7 @@
                 var p = new Paginador(
                         document.getElementById('paginador'),
                         document.getElementById('tblDatos'),
-                        5
+                        25
                         );
                 p.Mostrar();
 

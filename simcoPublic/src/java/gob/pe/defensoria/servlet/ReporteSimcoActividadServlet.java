@@ -124,7 +124,7 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
         for (ReporteSimcoActividad ac : listReporteActividad) {
             //ac.setCantidadActores(service.actorXactividadSimpleBuscarCount(ac.getIdActividad()));
             if (StringUtils.equals(ac.getClaseActividad(), "AD")) {
-                ac.setClaseActividad("Actuacion defensorial");
+                ac.setClaseActividad("Actuación defensorial");
                 ac.setTipoActividadDetalle(ac.getTipoActuacionDefensorialDetalle());
                 if(StringUtils.isNotBlank(ac.getTipoActuacionDefensorial()))
                     ac.setGrupoActividadDetalle(obtenerGrupoActuacionDefensorial(ac.getTipoActuacionDefensorial()));
@@ -409,7 +409,7 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
             return "Acciones en general";
         }
         if (StringUtils.equals(subTipo, "21")) {
-            return subTipo;
+            return "Noticias";
         }
         if (StringUtils.equals(subTipo, "22") || StringUtils.equals(subTipo, "23") || StringUtils.equals(subTipo, "24")
                 || StringUtils.equals(subTipo, "25") || StringUtils.equals(subTipo, "26")) {
@@ -458,25 +458,25 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
         String path = request.getRealPath(separador);
         if(tipo == 1){
             //WINDOWS
-            //jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortal.jasper" , new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortal.jasper" , new HashMap(), beanCollectionDataSource);
             //linux
-            jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortal.jasper", new HashMap(), beanCollectionDataSource);
+            //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortal.jasper", new HashMap(), beanCollectionDataSource);
         }
             
         else{
             //WINDOWS
-            //jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
             //linux
-            jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);   
+            //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoActividadPortalPDF.jasper", new HashMap(), beanCollectionDataSource);   
         }
     }
     
         
-    protected String separador = "/"; //linux
-    //protected String separador = "\\"; //windows
+    //protected String separador = "/"; //linux
+    protected String separador = "\\"; //windows
 
-    protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
-    //protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
+    //protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
+    protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
     
     public String retornapath(String cadena) {
         int cont = 0;
@@ -499,7 +499,7 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
         for (ReporteSimcoActividad ac : listReporteActividad) {
             //ac.setCantidadActores(service.actorXactividadSimpleBuscarCount(ac.getIdActividad()));
             if (StringUtils.equals(ac.getClaseActividad(), "AD")) {
-                ac.setClaseActividad("Actuacion defensorial");
+                ac.setClaseActividad("Actuación defensorial");
                 ac.setTipoActividadDetalle(ac.getTipoActuacionDefensorialDetalle());
                 if(StringUtils.isNotBlank(ac.getTipoActuacionDefensorial()))
                     ac.setGrupoActividadDetalle(obtenerGrupoActuacionDefensorial(ac.getTipoActuacionDefensorial()));

@@ -131,8 +131,8 @@ public class ReporteSimcoVictimaServlet extends HttpServlet {
                 rsv.setSubTipoAcontecimientoDetalle(obtenerSubTipoAcontecimiento(rsv.getTipoAcontecimiento()));
                 rsv.setTipoAcontecimientoDetalle(obtenerTipoAcontecimiento(rsv.getTipoAcontecimiento()));
                 rsv.setGrupoAcontecimientoDetalle(obtenerGrupoAcontecimiento(rsv.getTipoAcontecimiento()));
-                if(rsv.getIndicadorNN() != null && rsv.getIndicadorNN() == 1)
-                    rsv.setTipoVictima("NN");    
+                /*if(rsv.getIndicadorNN() != null && rsv.getIndicadorNN() == 1)
+                    rsv.setTipoVictima("NN");    */
             }
         }
         return generarDatatable(listReporteVictima);
@@ -255,7 +255,7 @@ public class ReporteSimcoVictimaServlet extends HttpServlet {
             return "Acciones en general";
         }
         if (StringUtils.equals(subTipo, "21")) {
-            return subTipo;
+            return "Noticias";
         }
         if (StringUtils.equals(subTipo, "22") || StringUtils.equals(subTipo, "23") || StringUtils.equals(subTipo, "24")
                 || StringUtils.equals(subTipo, "25") || StringUtils.equals(subTipo, "26")) {
@@ -286,8 +286,8 @@ public class ReporteSimcoVictimaServlet extends HttpServlet {
             i++;
             sb.append("<tr>");
                 sb.append("<td>").append(i).append("</td>");
-                sb.append("<td>").append(rsa.getTipoAcontecimientoDetalle()).append("</td>");
-                sb.append("<td>").append(rsa.getSubTipoAcontecimientoDetalle()).append("</td>");
+                sb.append("<td>").append(rsa.getTipoAcontecimientoDetalle() == null? "" : rsa.getTipoAcontecimientoDetalle()).append("</td>");
+                sb.append("<td>").append(rsa.getSubTipoAcontecimientoDetalle() == null? "" : rsa.getSubTipoAcontecimientoDetalle()).append("</td>");
                 sb.append("<td>").append(rsa.getDepartamento()).append("</td>");
                 sb.append("<td>").append(rsa.getTipoVictima()).append("</td>");
                 sb.append("<td>").append(rsa.getNombreCompletoVictima()).append("</td>");
@@ -337,21 +337,21 @@ public class ReporteSimcoVictimaServlet extends HttpServlet {
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(lista);
         String path = request.getRealPath(separador);
         if(tipo == 1){
-            //jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoVictimaPortal.jasper", new HashMap(), beanCollectionDataSource);
-            jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoVictimaPortal.jasper", new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoVictimaPortal.jasper", new HashMap(), beanCollectionDataSource);
+            //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoVictimaPortal.jasper", new HashMap(), beanCollectionDataSource);
         }    
         else{
-            //jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoVictimaPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
-            jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoVictimaPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+            jasperPrint = JasperFillManager.fillReport(path+"/jasper/reporteSimcoVictimaPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
+            //jasperPrint = JasperFillManager.fillReport("/home/glassfish/glassfish4/glassfish/domains/domain1/applications/simcoPublic/jasper/reporteSimcoVictimaPortalPDF.jasper", new HashMap(), beanCollectionDataSource);
         }
             
     }
     
-    protected String separador = "/"; //linux
-    //protected String separador = "\\"; //windows
+    //protected String separador = "/"; //linux
+    protected String separador = "\\"; //windows
 
-    protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
-    //protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
+    //protected static String FILE_SYSTEM="/home/glassfish/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//linux
+    protected static String FILE_SYSTEM = "C:/server/glassfish-4.0/glassfish4/glassfish/domains/domain1/docroot/filesystem/";//windows
     
     public String retornapath(String cadena) {
         int cont = 0;
