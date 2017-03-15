@@ -32,7 +32,7 @@ public class SimcoFacade {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT DISTINCT A.* FROM ( ");
         sb.append("    SELECT B.* FROM ( ");
-        sb.append("    SELECT TO_CHAR(D.N_ID_CASO), D.C_CODIGOCASO, D.C_NOMCASO, ROWNUM NUMFILA  FROM SIMCO_REG_CASO D ");
+        sb.append("    SELECT TO_CHAR(D.N_ID_CASO), D.C_CODIGOCASO, D.C_NOMCASO, ROWNUM NUMFILA  FROM SIMCO_REPORTE_CASO D ");
         sb.append("    INNER JOIN SIMCO_REPORTE_CODIGO X ON D.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A' ");
         sb.append("    WHERE UPPER(D.C_CODIGOCASO||D.C_NOMCASO) LIKE ? AND D.C_INDVIGENTE = 'A' AND D.C_TIPOESTADO IN ('04','05')");
         sb.append("    ) B WHERE NUMFILA BETWEEN ? AND ?) A  ORDER BY A.NUMFILA ");
@@ -59,7 +59,8 @@ public class SimcoFacade {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT DISTINCT A.* FROM ( ");
         sb.append("    SELECT B.* FROM ( ");
-        sb.append("    SELECT TO_CHAR(D.N_ID_ACTOR), D.C_TIPOGENERAL, D.C_NOMACTOR||' '||D.C_APELLIDOPATACTOR||' '||D.C_APELLIDOMATACTOR, D.C_DNIACTOR, D.C_RUCACTOR, ROWNUM NUMFILA FROM SIMCO_REG_ACTOR D  ");
+        sb.append("    SELECT TO_CHAR(D.N_ID_ACTOR), D.C_TIPOGENERAL, D.C_NOMACTOR||' '||D.C_APELLIDOPATACTOR||' '||D.C_APELLIDOMATACTOR, D.C_DNIACTOR, D.C_RUCACTOR, ROWNUM NUMFILA FROM SIMCO_REPORTE_ACTOR D  ");
+        sb.append("    INNER JOIN SIMCO_REPORTE_CODIGO X ON D.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A'  ");
         sb.append("    WHERE UPPER(D.C_NOMACTOR||D.C_APELLIDOPATACTOR||D.C_APELLIDOMATACTOR) LIKE ?  ");
         sb.append("    ) B WHERE NUMFILA BETWEEN ? AND ?) A ORDER BY A.NUMFILA");
         Query query = em.createNativeQuery(sb.toString());
@@ -393,7 +394,8 @@ sb.append("WHERE 1 = 1 ");
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT COUNT(DISTINCT A.N_ID_ACTIVIDAD) FROM SIMCO_REPORTE_ACTIVIDAD A ");
         sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON A.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A' ");
-        sb.append("        INNER JOIN SIMCO_REG_ACTIVIDAD_ACTOR B ON A.N_ID_ACTIVIDAD = B.N_ID_ACTIVIDAD ");
+        sb.append("        INNER JOIN (SELECT B1.* FROM SIMCO_REPORTE_ACTIVIDAD_ACTOR B1   ");
+        sb.append("        INNER JOIN SIMCO_REPORTE_CODIGO X ON B1.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A'   ");
         sb.append("        WHERE A.C_TIPO = 'AC' AND B.N_ID_ACTOR = ? ");
         Query query = em.createNativeQuery(sb.toString());
         query.setParameter(1, idActor);
@@ -403,14 +405,31 @@ sb.append("WHERE 1 = 1 ");
     
     public List<Object[]> contadorCasosEstado(String estadoCaso, String anho){
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT COUNT(A.N_ID_CASO) TOTAL, TO_CHAR(A.D_FECHAINICIO, 'YYYY-MM') MES  FROM SIMCO_REPORTE_CASO A  ");
+        sb.append("SELECT COUNT(A.N_ID_CASO) TOTAL, TO_CHAR(A.D_FECHAINICIO, 'MM-YYYY') MES  FROM SIMCO_REPORTE_CASO A   ");
         sb.append("INNER JOIN SIMCO_REPORTE_CODIGO B ON A.N_ID_CODIGOCARGA = B.N_ID_REPORTE AND B.C_ANHO||B.C_MES = TO_CHAR(SYSDATE, 'YYMM') AND B.C_IND_ACTIVO = 'A' ");
         sb.append("WHERE A.C_INDVIGENTE= 'A' AND C_INDAPROBADO = 'A' AND A.C_TIPOESTADO = ? AND TO_CHAR(A.D_FECHAINICIO, 'YYYY') = ?  ");
-        sb.append("GROUP BY TO_CHAR(A.D_FECHAINICIO, 'YYYY-MM')");
+        sb.append("GROUP BY TO_CHAR(A.D_FECHAINICIO, 'MM-YYYY') ORDER BY MES");
         Query query = em.createNativeQuery(sb.toString());
         query.setParameter(1, estadoCaso);
         query.setParameter(2, anho);
         List<Object[]> lista =  query.getResultList();
         return lista;
     }   
+    
+    public Object contadorCasosEstadoGeneral(String estadoCaso, String anho, String mes){
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT COUNT(A.N_ID_CASO) TOTAL FROM SIMCO_REPORTE_CASO A ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO B ON A.N_ID_CODIGOCARGA = B.N_ID_REPORTE AND B.C_ANHO||B.C_MES = TO_CHAR(SYSDATE, 'YYMM') AND B.C_IND_ACTIVO = 'A'  ");
+        sb.append("WHERE A.C_INDVIGENTE= 'A' AND C_INDAPROBADO = 'A' AND A.C_TIPOESTADO = ? AND TO_CHAR(A.D_FECHAINICIO, 'YYYY') = ?  AND TO_CHAR(A.D_FECHAINICIO, 'MM') = ?");
+        Query query = em.createNativeQuery(sb.toString());
+        query.setParameter(1, estadoCaso);
+        query.setParameter(2, anho);
+        query.setParameter(3, mes);
+        Object contador = query.getSingleResult();
+        return contador;
+    }
+    
+
+
+
 }

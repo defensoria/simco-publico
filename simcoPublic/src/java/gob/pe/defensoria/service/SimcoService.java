@@ -307,5 +307,10 @@ public class SimcoService {
         return bg2.longValue();
     }
     
+    public Long contadorCasosEstadoGeneral(String estadoCaso, String anho, String mes){
+        Object obj = simcoFacade.contadorCasosEstadoGeneral(estadoCaso, anho, mes);
+        BigDecimal  bg2 = (BigDecimal) obj;
+        return bg2.longValue();
+    }
 }
 

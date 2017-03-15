@@ -47,6 +47,7 @@ public class ReporteSimcoInicioServlet extends HttpServlet {
     private void cargarGraficos003(HttpServletRequest request, String anho) {
         try {
             StringBuilder sb = new StringBuilder();
+            
             Map<String, Integer> map2 = service.contadorCasosEstado("04", anho);
             for (String key : map2.keySet()) {
                 sb.append("{'period': '").append(key).append("', 'Activo': ").append(map2.get(key)).append("},");
