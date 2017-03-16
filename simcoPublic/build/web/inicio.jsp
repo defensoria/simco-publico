@@ -111,8 +111,7 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <script type="text/javascript">
+                                                                <script type="text/javascript">
                                     $(document).ready(function(){
                                        $('#idSelectAnho').val(<%=request.getAttribute("anho")%>); 
                                     });
@@ -126,7 +125,9 @@
                                             xkey: 'period',
                                             ykeys: ['Activo', 'Latente'],
                                             labels: ['Activo', 'Latente'],
-                                            smooth: false
+                                            smooth: false,
+                                            xLabelAngle: 70,
+                                            resize: true
                                         });
                                     });
 

@@ -405,10 +405,10 @@ sb.append("WHERE 1 = 1 ");
     
     public List<Object[]> contadorCasosEstado(String estadoCaso, String anho){
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT COUNT(A.N_ID_CASO) TOTAL, TO_CHAR(A.D_FECHAINICIO, 'MM-YYYY') MES  FROM SIMCO_REPORTE_CASO A   ");
+        sb.append("SELECT COUNT(A.N_ID_CASO) TOTAL, TO_CHAR(A.D_FECHAINICIO, 'YYYY-MM') MES  FROM SIMCO_REPORTE_CASO A   ");
         sb.append("INNER JOIN SIMCO_REPORTE_CODIGO B ON A.N_ID_CODIGOCARGA = B.N_ID_REPORTE AND B.C_ANHO||B.C_MES = TO_CHAR(SYSDATE, 'YYMM') AND B.C_IND_ACTIVO = 'A' ");
         sb.append("WHERE A.C_INDVIGENTE= 'A' AND C_INDAPROBADO = 'A' AND A.C_TIPOESTADO = ? AND TO_CHAR(A.D_FECHAINICIO, 'YYYY') = ?  ");
-        sb.append("GROUP BY TO_CHAR(A.D_FECHAINICIO, 'MM-YYYY') ORDER BY MES");
+        sb.append("GROUP BY TO_CHAR(A.D_FECHAINICIO, 'YYYY-MM') ORDER BY MES");
         Query query = em.createNativeQuery(sb.toString());
         query.setParameter(1, estadoCaso);
         query.setParameter(2, anho);

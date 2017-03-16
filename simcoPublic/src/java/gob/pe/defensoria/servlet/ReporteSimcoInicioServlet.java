@@ -54,7 +54,7 @@ public class ReporteSimcoInicioServlet extends HttpServlet {
             }
             Map<String, Integer> map3 = service.contadorCasosEstado("05", anho);
             for (String key : map3.keySet()) {
-                sb.append("{'period': '").append(key).append("', 'Latente': ").append(map2.get(key)).append("},");
+                sb.append("{'period': '").append(key).append("', 'Latente': ").append(map3.get(key)).append("},");
             }
             
             
