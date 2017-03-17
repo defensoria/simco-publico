@@ -126,8 +126,7 @@
                                             ykeys: ['Activo', 'Latente'],
                                             labels: ['Activo', 'Latente'],
                                             smooth: false,
-                                            xLabelAngle: 70,
-                                            resize: true
+                                            xLabelAngle: 60
                                         });
                                     });
 
@@ -138,7 +137,7 @@
 
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
-                                        <span >Gráficos de Casos de conflictos sociales</span>
+                                        <span >Frecuencia de casos de conflictos sociales</span>
                                     </div>
                                     <div class="panel-body">
                                         <div id="graph3"></div>
@@ -156,7 +155,7 @@
                                             <aside>
                                                 <div class="lateral youtube">
                                                     <h3>Canal <i class="fa fa-youtube fa-lg"></i></h3>
-                                                    <p><iframe width="100%" height="205" src="https://www.youtube.com/embed/AJiNSWsP9Gk?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>
+                                                    <iframe width="100%" height="205" src="https://www.youtube.com/embed/videoseries?list=PLO9TD_9AB8_M3H62phadMcncaiZgK8FdX" frameborder="0" allowfullscreen></iframe>
                                                 </div>
                                             </aside>
                                         </td>

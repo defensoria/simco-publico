@@ -225,7 +225,7 @@
                                             <aside>
                                                 <div class="lateral youtube">
                                                     <h3>Canal <i class="fa fa-youtube fa-lg"></i></h3>
-                                                    <p><iframe width="100%" height="205" src="https://www.youtube.com/embed/AJiNSWsP9Gk?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>
+                                                    <iframe width="100%" height="205" src="https://www.youtube.com/embed/videoseries?list=PLO9TD_9AB8_M3H62phadMcncaiZgK8FdX" frameborder="0" allowfullscreen></iframe>
                                                 </div>
                                             </aside>
                                         </td>
