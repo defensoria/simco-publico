@@ -169,7 +169,7 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
                     }
                     ac.setListaTipoViolencia(ses);
                 }
-                //ac.setCantidadAcuerdos(service.actaAcuerdoDetalleCount(ac.getIdActividad()));
+                ac.setCantidadAcuerdos(Integer.parseInt(service.contadorActaAcuerdo(ac.getIdActividad()).toString()));
                 
                 if(StringUtils.isNotBlank(ac.getTipoAcontecimiento())){
                     ac.setSubTipoAcontecimientoDetalle(obtenerSubTipoAcontecimiento(ac.getTipoAcontecimiento()));
@@ -544,7 +544,7 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
                     }
                     ac.setListaTipoViolencia(ses);
                 }
-                //ac.setCantidadAcuerdos(service.actaAcuerdoDetalleCount(ac.getIdActividad()));
+                ac.setCantidadAcuerdos(Integer.parseInt(service.contadorActaAcuerdo(ac.getIdActividad()).toString()));
                 
                 if(StringUtils.isNotBlank(ac.getTipoAcontecimiento())){
                     ac.setSubTipoAcontecimientoDetalle(obtenerSubTipoAcontecimiento(ac.getTipoAcontecimiento()));

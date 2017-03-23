@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSimcoActividadPortal" pageWidth="2875" pageHeight="600" orientation="Landscape" columnWidth="2875" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="e8e17cc8-2bb2-4615-af5f-f83f4d9817ad">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSimcoActividadPortal" pageWidth="3163" pageHeight="600" orientation="Landscape" columnWidth="3163" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="e8e17cc8-2bb2-4615-af5f-f83f4d9817ad">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="2032"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
@@ -83,9 +83,7 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		
-	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false"/>
 	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
@@ -109,6 +107,8 @@
 	<field name="resultadoViolenciaItem5" class="java.lang.Integer"/>
 	<field name="resultadoViolenciaItem6" class="java.lang.Integer"/>
 	<field name="resultadoViolenciaItem7" class="java.lang.Integer"/>
+	<field name="nombreRegion" class="java.lang.String"/>
+	<field name="cantidadAcuerdos" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -280,6 +280,22 @@
 				</textElement>
 				<text><![CDATA[Detenidos]]></text>
 			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2875" y="38" width="171" height="50" forecolor="#FFFFFF" backcolor="#0066CC" uuid="406dbb1a-9708-4db2-8481-9d06135085ac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Región]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="3046" y="38" width="117" height="50" forecolor="#FFFFFF" backcolor="#0066CC" uuid="fbaea5d1-f138-420e-aa09-849f996a73c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Cantidad de acuerdos]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -363,6 +379,22 @@
 			<textField>
 				<reportElement x="0" y="0" width="43" height="20" uuid="535ea1f5-85e0-4ef7-91d0-13097d47e0b5"/>
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="2875" y="0" width="171" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="5a27bb1a-b8ce-41d4-a4af-433d8270e3b4"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreRegion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="3046" y="0" width="117" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="b4b9f07c-7719-4e1a-9c25-49764099d841"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidadAcuerdos}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

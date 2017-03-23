@@ -312,5 +312,11 @@ public class SimcoService {
         BigDecimal  bg2 = (BigDecimal) obj;
         return bg2.longValue();
     }
+    
+    public Long contadorActaAcuerdo(Long idActividad){
+        Object obj = simcoFacade.contadorActaAcuerdo(idActividad);
+        BigDecimal  bg2 = (BigDecimal) obj;
+        return bg2.longValue();
+    }
 }
 

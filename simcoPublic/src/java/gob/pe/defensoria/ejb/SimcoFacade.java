@@ -450,7 +450,20 @@ sb.append("WHERE A.C_TIPO = 'AC' AND B.N_ID_ACTOR = ? ");
         return contador;
     }
     
+    public Object contadorActaAcuerdo(Long idActividad){
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT COUNT(A.N_ID_ACUERDO) FROM SIMCO_REG_DET_ACTA_ACUERDO A ");
+        sb.append("INNER JOIN SIMCO_REG_ACTA_ACUERDO B ON A.N_ID_ACTA = B.N_ID_ACTA  ");
+        sb.append("INNER JOIN SIMCO_REG_ACTIVIDAD_ACTAS C ON B.N_ID_ACTA = C.N_ID_ACTA ");
+        sb.append("WHERE C.N_ID_ACTIVIDAD = ? ");
+        Query query = em.createNativeQuery(sb.toString());
+        query.setParameter(3, idActividad);
+        Object contador = query.getSingleResult();
+        return contador;
+    }
 
-
+        
+        
+        
 
 }
