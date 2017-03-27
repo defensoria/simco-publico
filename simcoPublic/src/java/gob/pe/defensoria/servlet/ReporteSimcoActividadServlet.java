@@ -194,7 +194,7 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
                         ac.setResultadoViolenciaItem1(Integer.parseInt(entry.getValue().toString()));
                     if(StringUtils.equals(entry.getKey().toString(), "Heridos"))
                         ac.setResultadoViolenciaItem2(Integer.parseInt(entry.getValue().toString()));
-                    if(StringUtils.equals(entry.getKey().toString(), "Secuestrados"))
+                    if(StringUtils.equals(entry.getKey().toString(), "Retenidos"))
                         ac.setResultadoViolenciaItem3(Integer.parseInt(entry.getValue().toString()));
                     if(StringUtils.equals(entry.getKey().toString(), "Detenidos"))
                         ac.setResultadoViolenciaItem4(Integer.parseInt(entry.getValue().toString()));
@@ -202,8 +202,8 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
                         ac.setResultadoViolenciaItem5(Integer.parseInt(entry.getValue().toString()));
                     if(StringUtils.equals(entry.getKey().toString(), "Otros"))
                         ac.setResultadoViolenciaItem6(Integer.parseInt(entry.getValue().toString()));
-                    if(StringUtils.equals(entry.getKey().toString(), "NN"))
-                        ac.setResultadoViolenciaItem7(Integer.parseInt(entry.getValue().toString()));
+                    /*if(StringUtils.equals(entry.getKey().toString(), "NN"))
+                        ac.setResultadoViolenciaItem7(Integer.parseInt(entry.getValue().toString()));*/
                 }
                 ac.setListaResultadoViolencia(itemsResultadoViolencia);
             }
@@ -569,7 +569,7 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
                         ac.setResultadoViolenciaItem1(Integer.parseInt(entry.getValue().toString()));
                     if(StringUtils.equals(entry.getKey().toString(), "Heridos"))
                         ac.setResultadoViolenciaItem2(Integer.parseInt(entry.getValue().toString()));
-                    if(StringUtils.equals(entry.getKey().toString(), "Secuestrados"))
+                    if(StringUtils.equals(entry.getKey().toString(), "Retenidos"))
                         ac.setResultadoViolenciaItem3(Integer.parseInt(entry.getValue().toString()));
                     if(StringUtils.equals(entry.getKey().toString(), "Detenidos"))
                         ac.setResultadoViolenciaItem4(Integer.parseInt(entry.getValue().toString()));
@@ -577,8 +577,8 @@ public class ReporteSimcoActividadServlet extends HttpServlet {
                         ac.setResultadoViolenciaItem5(Integer.parseInt(entry.getValue().toString()));
                     if(StringUtils.equals(entry.getKey().toString(), "Otros"))
                         ac.setResultadoViolenciaItem6(Integer.parseInt(entry.getValue().toString()));
-                    if(StringUtils.equals(entry.getKey().toString(), "NN"))
-                        ac.setResultadoViolenciaItem7(Integer.parseInt(entry.getValue().toString()));
+                    /*if(StringUtils.equals(entry.getKey().toString(), "NN"))
+                        ac.setResultadoViolenciaItem7(Integer.parseInt(entry.getValue().toString()));*/
                 }
                 ac.setListaResultadoViolencia(itemsResultadoViolencia);
             }

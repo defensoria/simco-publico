@@ -160,12 +160,11 @@ public class SimcoService {
     public Map<String, String> mapearTipos(List<String> listaV) {
         Map tipoVictima = new HashMap();
         int nroMuertos = 0;
-        int nroSecuestrados = 0;
+        int nroRetenido = 0;
         int nroHerido = 0;
         int nroDetenidos = 0;
         int nroOtros = 0;
         int nroDesaparecidos = 0;
-        int nN = 0;
         if (listaV != null) {
             for (String av : listaV) {
                 if (StringUtils.equals(av, "01")) {
@@ -175,7 +174,7 @@ public class SimcoService {
                     nroHerido++;
                 }
                 if (StringUtils.equals(av, "03")) {
-                    nroSecuestrados++;
+                    nroRetenido++;
                 }
                 if (StringUtils.equals(av, "04")) {
                     nroDetenidos++;
@@ -186,18 +185,14 @@ public class SimcoService {
                 if (StringUtils.equals(av, "06")) {
                     nroOtros++;
                 }
-                if (StringUtils.equals(av, "0")) {
-                    nN++;
-                }
             }
         }
         tipoVictima.put("Muertos", nroMuertos);
         tipoVictima.put("Heridos", nroHerido);
-        tipoVictima.put("Secuestrados", nroSecuestrados);
+        tipoVictima.put("Retenidos", nroRetenido);
         tipoVictima.put("Detenidos", nroDetenidos);
         tipoVictima.put("Desaparecidos", nroDesaparecidos);
         tipoVictima.put("Otros", nroOtros);
-        tipoVictima.put("NN", nN);
         return tipoVictima;
     }
     

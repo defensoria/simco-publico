@@ -102,7 +102,7 @@
                                 </style>
                                 <div class="row titlecatgen marginbp2">
                                     <div class="col-xs-8 col-sm-8 col-md-8">
-                                        <h2 class="titlecat1">Estadísticas de casos por estado</h2>
+                                        <h2 class="titlecat1">Historial de los casos activos y latentes</h2>
                                     </div>
                                     <div class="col-xs-4 col-sm-4 col-md-4">
                                         <select id="idSelectAnho" name="idSelectAnho" class="form-control">
@@ -110,7 +110,11 @@
                                             <option value="2016">2016</option>
                                         </select>
                                     </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <h3 class="titlecat2">Este cuadro muestra el estado de los conflictos registrados en nuestro último reporte, desde el mes en que se registraron como nuevos hasta la actualidad</h3>
+                                    </div>
                                 </div>
+                                
                                                                 <script type="text/javascript">
                                     $(document).ready(function(){
                                        $('#idSelectAnho').val(<%=request.getAttribute("anho")%>); 

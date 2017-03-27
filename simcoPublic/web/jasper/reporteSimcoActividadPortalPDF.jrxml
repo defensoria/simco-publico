@@ -160,7 +160,7 @@
 					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Regón]]></text>
+				<text><![CDATA[Región]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="742" y="0" width="56" height="50" forecolor="#FFFFFF" backcolor="#0066CC" uuid="518d1921-73df-48a6-b630-fbdf743af3c9"/>
