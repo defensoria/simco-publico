@@ -76,7 +76,7 @@
                         <li><a href="reporteSimcoActor">Actores</a></li>
                         <li><a href="reporteSimcoVictima">Víctimas de la violencia</a></li>
                         <li><a target="_blank" href="http://www.defensoria.gob.pe/temas.php?des=3#r">Publicaciones</a></li>
-                        <li><a href="#">Sobre SIMCO</a></li>
+                        <li><a href="#">Sobre el SIMCO</a></li>
                     </ul>
                 </div>
             </div>
@@ -220,7 +220,7 @@
                                         </table>
                                     </div>
                                     <div class="panel-footer" style="text-align: right">
-                                        <button type="submit" class="btn btn-default simcoButton"  id="btnReset" name="btnReset" value="btnReset">
+                                        <button type="submit" class="btn btn-warning simcoButton"  id="btnReset" name="btnReset" value="btnReset">
                                             <span class="glyphicon glyphicon-erase" /><b>Limpiar</b>
                                         </button>
                                         &#160;&#160;&#160;

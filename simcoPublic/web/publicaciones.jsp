@@ -75,7 +75,7 @@
                         <li><a href="reporteSimcoActor">Actores</a></li>
                         <li><a href="reporteSimcoVictima">Víctimas de la violencia</a></li>
                         <li><a href="publicaciones.jsp">Publicaciones</a></li>
-                        <li><a href="#">Sobre SIMCO</a></li>
+                        <li><a href="#">Sobre el SIMCO</a></li>
                     </ul>
                 </div>
             </div>

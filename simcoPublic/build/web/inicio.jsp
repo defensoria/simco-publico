@@ -80,7 +80,7 @@
                         <li><a href="reporteSimcoActor">Actores</a></li>
                         <li><a href="reporteSimcoVictima">Víctimas de la violencia</a></li>
                         <li><a target="_blank" href="http://www.defensoria.gob.pe/temas.php?des=3#r">Publicaciones</a></li>
-                        <li><a href="#">Sobre SIMCO</a></li>
+                        <li><a href="#">Sobre el SIMCO</a></li>
                     </ul>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                                         </select>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-12">
-                                        <h3 class="titlecat2">Este cuadro muestra el estado de los conflictos registrados en nuestro último reporte, desde el mes en que se registraron como nuevos hasta la actualidad</h3>
+                                        <h3 class="titlecat2">Este gráfico muestra el estado de los conflictos registrados en nuestro último reporte, desde el mes en que se registraron como nuevos hasta la actualidad.</h3>
                                     </div>
                                 </div>
                                 
