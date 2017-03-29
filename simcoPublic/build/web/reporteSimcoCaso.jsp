@@ -189,12 +189,12 @@
                                     </div>
                                     <div class="panel-footer" style="text-align: right">
                                         <button type="submit" class="btn btn-warning simcoButton"  id="btnReset" name="btnReset" value="btnReset">
-                                            <span class="glyphicon glyphicon-erase" /><b>Limpiar</b>
+                                            <span class="glyphicon glyphicon-erase" />Limpiar
                                         </button>
                                         &#160;&#160;&#160;
                                         <input type="hidden" id="nroPagina" name="nroPagina" value="0" />
                                         <button class="btn btn-primary simcoButton" id="btnBuscar" name="btnBuscar" value="buscar" onclick="return buscarCasos()">
-                                            <span class="glyphicon glyphicon-search" /><b>Buscar</b>
+                                            <span class="glyphicon glyphicon-search" />Buscar
                                         </button>
                                     </div>
 
@@ -223,6 +223,14 @@
                     <table style="width: 100%" id="tblDatos" class="table table-bordered table-hover table-striped">
                         <%=request.getAttribute("datatable")%>
                     </table>
+                    <input type="hidden" id="idCodigoCaso" name="idCodigoCaso"/>
+                    <input type="hidden" id="idFichaCaso" />
+                    <script>
+                        function verFicha(idCaso){
+                            $("#idCodigoCaso").val(idCaso);
+                            $("#idForm").submit();
+                        }
+                    </script>
                     <center>
                         <div id="paginador"></div>
                     </center>

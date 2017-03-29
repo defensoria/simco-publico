@@ -50,7 +50,6 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println(request.getRealPath(separador)); 
         response.setContentType("text/html;charset=UTF-8");
         request.setAttribute("listaAnhos", service.cargarAnho());
         request.setAttribute("listaTipoCaso", service.cargarTipoDocumento("90"));
@@ -59,6 +58,7 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
         request.setAttribute("listaTipoAcontecimiento", service.cargarTipoDocumento("70"));
         String btnBuscar = request.getParameter("btnBuscar");
         String btnReset = request.getParameter("btnReset");
+        String idCodigoCaso = request.getParameter("idCodigoCaso");
         if (StringUtils.isNotBlank(btnReset)) {
             request.setAttribute("datatable", "");
             request.getRequestDispatcher("/reporteSimcoCaso.jsp").forward(request, response);
@@ -98,6 +98,11 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
                 reporteSimcoCasoPdf(rsa, response, request);
                 return;
             }
+            if (idCodigoCaso != null && !StringUtils.equals(idCodigoCaso, "")) {
+                request.setAttribute("idCodigoCaso", idCodigoCaso);
+                request.getRequestDispatcher("/fichaCaso.jsp").forward(request, response);
+                return;
+            }
             request.setAttribute("selectAnho", selectAnho);
             request.setAttribute("selectTipoCaso", selectTipoCaso);
             request.setAttribute("selectRegion", selectRegion);
@@ -132,7 +137,7 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
             i++;
             sb.append("<tr>");
             sb.append("<td>").append(i).append("</td>");
-            sb.append("<td>").append(rsa.getNombreCaso()).append("</td>");
+            sb.append("<td><a onclick='verFicha("+rsa.getIdCaso()+")'>").append(rsa.getNombreCaso()).append("<a></td>");
             sb.append("<td>").append(rsa.getFechaInicioCaso()).append("</td>");
             sb.append("<td>").append(rsa.getRegionPrincial()).append("</td>");
             sb.append("<td>").append(rsa.getTipologia()).append("</td>");

@@ -204,12 +204,12 @@
                                     </div>
                                     <div class="panel-footer" style="text-align: right">
                                         <button type="submit" class="btn btn-warning simcoButton"  id="btnReset" name="btnReset" value="btnReset">
-                                            <span class="glyphicon glyphicon-erase" /><b>Limpiar</b>
+                                            <span class="glyphicon glyphicon-erase" />Limpiar
                                         </button>
                                         &#160;&#160;&#160;
                                         <input type="hidden" id="nroPagina" name="nroPagina" value="0" />
                                         <button class="btn btn-primary simcoButton" id="btnBuscar" name="btnBuscar" value="buscar" onclick="return buscarActividades()">
-                                            <span class="glyphicon glyphicon-search" /><b>Buscar</b>
+                                            <span class="glyphicon glyphicon-search" />Buscar
                                         </button>
                                     </div>
 
