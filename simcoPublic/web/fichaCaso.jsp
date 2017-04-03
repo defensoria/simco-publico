@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -11,6 +12,7 @@
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
         <link href="bootstrap/css/simco.css" rel="stylesheet">
         <link href="bootstrap/css/font-awesome.css" rel="stylesheet">
+        <link href="css/timeline.css" rel="stylesheet">
 
         <script src="bootstrap/js/modernizr.js"></script>
         <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
@@ -86,50 +88,237 @@
         <form id="idForm" method="post" action="reporteSimcoVictima">
             <div class="container">
                 <div role="tabpanel" class="tab-pane active" >
-                    <table style="width: 100%">
-                        <tr>
-                            <td style="width: 60%; vertical-align: top">
-                                <style>
-                                    td{
-                                        padding-bottom: 7px;
-                                    }
-                                </style>
-                                <div class="row titlecatgen marginbp2">
+                    <div class="chat-panel panel panel-default">
+                        <div class="panel-heading">
+                            <i style="font-size: 2em" class="fa fa-clock-o fa-fw"></i> 
+                            <span style="font-size: 2em">Ficha del caso</span>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
                                     <table style="width: 100%">
                                         <tr>
-                                            <td style="width:70%">
-                                                <h2 class="titlecat1">Linea de tiempo del Caso</h2>
+                                            <td style="width: 50%">
+                                                <span style="color: #007ACC; font-size: 1.5em">Detalles del Caso </span>
                                             </td>
-                                            <td style="text-align: right">
-                                                <h1><%=request.getAttribute("idCodigoCaso")%></h1>
+                                            <td>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="list-group" >
+
+                                                    <a href="#" class="list-group-item"style="color: black">
+                                                        <i class="fa fa-list fa-fw"></i> 
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold">Nombre del Caso:</span>
+                                                        <span class="pull-right  text-muted" style="font-size: 1.3em; color: black; font-weight: bold"><em><%=request.getAttribute("nombreCaso")%></em>
+                                                        </span>
+                                                    </a>
+                                                    <a href="#" class="list-group-item">
+                                                        <i class="fa fa-list fa-fw"></i> 
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold">Estado:</span>
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold" class="pull-right text-muted"><em><%=request.getAttribute("estado")%></em>
+                                                        </span>
+                                                    </a>
+                                                    <a href="#" class="list-group-item">
+                                                        <i class="fa fa-list fa-fw"></i> 
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold">Fase:</span>
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold" class="pull-right text-muted"><em><%=request.getAttribute("fase")%></em>
+                                                        </span>
+                                                    </a>
+                                                    <a href="#" class="list-group-item">
+                                                        <i class="fa fa-list fa-fw"></i> 
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold">Región princial:</span>
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold" class="pull-right text-muted"><em><%=request.getAttribute("region")%></em>
+                                                        </span>
+                                                    </a>
+                                                    <a href="#" class="list-group-item">
+                                                        <i class="fa fa-list fa-fw"></i> 
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold">Provincia principal:</span>
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold" class="pull-right text-muted"><em><%=request.getAttribute("provincia")%></em>
+                                                        </span>
+                                                    </a>
+                                                    <a href="#" class="list-group-item">
+                                                        <i class="fa fa-list fa-fw"></i> 
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold">Distrito principal:</span>
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold" class="pull-right text-muted"><em><%=request.getAttribute("distrito")%></em>
+                                                        </span>
+                                                    </a>
+                                                    <a href="#" class="list-group-item">
+                                                        <i class="fa fa-list fa-fw"></i> 
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold">Tipología:</span>
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold" class="pull-right text-muted"><em><%=request.getAttribute("tipologia")%></em>
+                                                        </span>
+                                                    </a>
+                                                    </a>
+                                                    <a href="#" class="list-group-item">
+                                                        <i class="fa fa-list fa-fw"></i> 
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold">Tipo actividad:</span>
+                                                        <span style="font-size: 1.3em; color: black; font-weight: bold" class="pull-right text-muted"><em><%=request.getAttribute("tipoActividad")%></em>
+                                                        </span>
+                                                    </a>
+
+                                                </div>
                                             </td>
                                         </tr>
                                     </table>
-                                </div>
-                                
-                                    
 
                                 </div>
-                            </td>
-                            <td style="vertical-align: top;">
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="width: 25%">
+                                <div class="col-md-6">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 50%">
+                                                <span style="color: #007ACC; font-size: 1.5em">Actores involucrados: </span>
+                                            </td>
+                                            <td>
 
-                                        </td>
-                                        <td>
-                                            <aside>
-                                                <div class="lateral youtube">
-                                                    <h3>Canal <i class="fa fa-youtube fa-lg"></i></h3>
-                                                    <iframe width="100%" height="205" src="https://www.youtube.com/embed/videoseries?list=PLO9TD_9AB8_M3H62phadMcncaiZgK8FdX" frameborder="0" allowfullscreen></iframe>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="panel panel-default">
+                                                    <div class="list-group">
+                                                        <c:forEach var="actor" items="${listaActores}">
+                                                            <a href="#" class="list-group-item">
+                                                                <i class="fa fa-user fa-fw"></i> 
+                                                                <span style="font-size: 1.1em; color: black; font-weight: bold">${actor.nombreActor}</span>
+                                                                <span  style="font-size: 1.3em; color: black; font-weight: bold" class="pull-right text-muted"><em>${actor.tipoActor}</em>
+                                                                </span>
+                                                            </a>
+                                                        </c:forEach>
+                                                    </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br/><br/><br/>
+                                </div>       
+                                <div class="col-md-12">
+                                    <span style="color: #007ACC; font-size: 1.5em">Linea de tiempo del caso </span>
+
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td style="font-size:1.5em;width:30%">
+                                                <span class="text-comun" style="color: black;font-weight: bold">Creado:</span>
+                                                <span style="color: black;font-weight: bold"><%=request.getAttribute("fechaPublicacion")%></span>
+                                            </td>
+                                            <td style="width:20%"></td>
+                                            <td style="width:50%">
+                                                <style>
+                                                    span.red {
+
+                                                        border-radius: 0.8em;
+                                                        -moz-border-radius: 0.8em;
+                                                        -webkit-border-radius: 0.8em;
+                                                        color: #ffffff;
+                                                        display: inline-block;
+                                                        font-weight: bold;
+                                                        line-height: 1.6em;
+                                                        margin-right: 15px;
+                                                        text-align: center;
+                                                        width: 1.6em; 
+                                                    }
+                                                </style>
+                                                <span style="background: red;" class="red"><%=request.getAttribute("contadorAcontecimientoPorCaso")%></span>
+                                                <span style="font-size:1.4em; color: black; font-weight: bold" class="text-comun"> acontecimientos</span>
+                                                <br/>
+                                                <span style="background: green;" class="red"><%=request.getAttribute("contadorActuacionDefensorialPorCaso")%></span>
+                                                <span style="font-size:1.4em; color: black; font-weight: bold" class="text-comun"> actuaciones defensoriales</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br/><br/><br/>
+                                    <div class="timeline-centered" style="width: 70%">                                
+                                        <c:forEach var="actividad" items="${listaActividades}">
+                                            <article class="timeline-entry">
+
+                                                <div class="timeline-entry-inner">
+                                                    <c:if test="${actividad.tipoActividad == 'AC'}">
+                                                        <div class="timeline-icon bg-secondary">
+                                                            <i class="entypo-suitcase"></i>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${actividad.tipoActividad == 'AD'}">
+                                                        <div class="timeline-icon bg-success">
+                                                            <i class="entypo-feather"></i>
+                                                        </div>
+                                                    </c:if>
+                                                    <div class="timeline-label">
+                                                        <table style="width:100%">
+                                                            <tr>
+                                                                <td style="padding-bottom: 10px">
+                                                                    <figure class="image rounded">
+                                                                        <c:if test="${actividad.rutaUsuarioRegistro == ''}">
+                                                                            <img style="width:45px" src="/simcoPublic/imagenes/user-admin.png" class="img-circle" data-lock-picture="images/!logged-user.jpg" />
+                                                                        </c:if>
+                                                                        <c:if test="${actividad.rutaUsuarioRegistro != ''}">
+                                                                            <img style="width:45px" src="${actividad.rutaUsuarioRegistro}" class="img-circle" data-lock-picture="images/!logged-user.jpg" />
+                                                                        </c:if>    
+                                                                    </figure>
+                                                                </td>
+                                                                <td style="font-size: 1.4em; padding-bottom: 10px">
+                                                                    <c:if test="${actividad.tipoActividad == 'AC'}">
+                                                                        <span style="color:black"><b>Acontecimiento: </b></span>
+                                                                    </c:if>
+                                                                    <c:if test="${actividad.tipoActividad == 'AD'}">
+                                                                        <span style="color:black"><b>Actuación defensorial: </b></span>
+                                                                    </c:if>
+                                                                    <span style="color:black; font-weight: bold" >${actividad.nombreActividad}</span>
+                                                                    <br/>
+                                                                    <span style="color:black">Por: ${actividad.usuarioRegistro} - Comisionado </span>
+                                                                    <br/>
+                                                                    <small class="pull-left text-muted" style="color:black">
+                                                                        <i class="fa fa-clock-o fa-fw"></i>
+                                                                        <span style="color:black">Fecha de la actividad: </span><span style="color:black">${actividad.fechaInicio}</span> 
+                                                                    </small>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table style="width: 100%">
+                                                            <tr>
+                                                                <td style="width: 45%; vertical-align: top">
+                                                                    <c:if test="${actividad.ruta != ''}">
+                                                                        <img class="img-thumbnail lightbox" src="/filesystem/${actividad.ruta}" height="50%" width="80%"/>
+                                                                    </c:if>
+                                                                </td>
+                                                                <td>
+                                                                    <span style="color:black; text-align: justify; font-size: 1.2em;  vertical-align: top;">Detalle: ${actividad.descripcion}</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="3" style="font-size: 1.4em; ">
+                                                                    <c:if test="${actividad.tipoActividad == 'AC'}">
+                                                                        <small class="pull-left text-muted" style="color:black">
+                                                                            <i class="fa fa-clock-o fa-fw"></i><span style="color:black">Registro del acontecimiento: </span>
+                                                                        </small>
+                                                                    </c:if>
+                                                                    <c:if test="${actividad.tipoActividad == 'AD'}">
+                                                                        <small class="pull-left text-muted" style="color:black">
+                                                                            <i class="fa fa-clock-o fa-fw"></i><span style="color:black ">Registro de la actuación defensorial: </span>   
+                                                                        </small>
+                                                                    </c:if>
+
+                                                                    <span style="color:black" >${actividad.fechaRegistro}</span>
+
+                                                                    <br/>
+                                                                    <small class="pull-left text-muted" style="color:black">
+                                                                        <i class="fa fa-clock-o fa-fw"></i><span style="color:black">Última modificación: </span>
+                                                                        <span style="color:black">${actividad.fechaModificacion}</span>
+                                                                    </small>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
                                                 </div>
-                                            </aside>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
+                                            </article>
+                                        </c:forEach>
+                                    </div>  
+                                </div>                         
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

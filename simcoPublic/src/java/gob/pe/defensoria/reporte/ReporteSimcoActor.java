@@ -107,6 +107,8 @@ public class ReporteSimcoActor {
     
     private Double inversionInvolucrada;
     
+    private String tipoGeneral;
+    
     
     /**
      *
@@ -495,6 +497,14 @@ public class ReporteSimcoActor {
 
     public void setInversionInvolucrada(Double inversionInvolucrada) {
         this.inversionInvolucrada = inversionInvolucrada;
+    }
+
+    public String getTipoGeneral() {
+        return tipoGeneral;
+    }
+
+    public void setTipoGeneral(String tipoGeneral) {
+        this.tipoGeneral = tipoGeneral;
     }
 
 }

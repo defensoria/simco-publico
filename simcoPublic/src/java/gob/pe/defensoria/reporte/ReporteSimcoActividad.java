@@ -13,7 +13,9 @@ import java.util.List;
  */
 public class ReporteSimcoActividad {
     
-private Long idActividad;
+    private Long idActividad;
+    
+    private String tipoActividad;
     
     private String anho;
     
@@ -117,6 +119,19 @@ private Long idActividad;
     
     private Double inversionInvolucrada;
     
+    private String usuarioRegistro;
+    
+    private String rutaUsuarioRegistro;
+    
+    private String fechaInicio;
+    
+    private String fechaRegistro;
+    
+    private String fechaModificacion;
+    
+    private String ruta;
+    
+    private String descripcion;
     
     public String getAnho() {
         return anho;
@@ -532,6 +547,70 @@ private Long idActividad;
 
     public void setInversionInvolucrada(Double inversionInvolucrada) {
         this.inversionInvolucrada = inversionInvolucrada;
+    }
+
+    public String getTipoActividad() {
+        return tipoActividad;
+    }
+
+    public void setTipoActividad(String tipoActividad) {
+        this.tipoActividad = tipoActividad;
+    }
+
+    public String getUsuarioRegistro() {
+        return usuarioRegistro;
+    }
+
+    public void setUsuarioRegistro(String usuarioRegistro) {
+        this.usuarioRegistro = usuarioRegistro;
+    }
+
+    public String getRutaUsuarioRegistro() {
+        return rutaUsuarioRegistro;
+    }
+
+    public void setRutaUsuarioRegistro(String rutaUsuarioRegistro) {
+        this.rutaUsuarioRegistro = rutaUsuarioRegistro;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+
+    public String getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public String getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(String fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
 }

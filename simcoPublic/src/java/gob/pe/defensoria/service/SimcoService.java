@@ -15,6 +15,7 @@ import gob.pe.defensoria.reporte.ReporteSimcoVictima;
 import gob.pe.defensoria.servlet.Filtro;
 import gob.pe.defensoria.type.AnhosEnum;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -310,6 +311,82 @@ public class SimcoService {
     
     public Long contadorActaAcuerdo(Long idActividad){
         Object obj = simcoFacade.contadorActaAcuerdo(idActividad);
+        BigDecimal  bg2 = (BigDecimal) obj;
+        return bg2.longValue();
+    }
+    
+    public ReporteSimcoCaso buscarCaso(Long idCaso){
+        Object[] obj = simcoFacade.buscarCaso(idCaso);
+        ReporteSimcoCaso rsc = new ReporteSimcoCaso();
+        rsc.setIdCaso(Long.parseLong(obj[0].toString()));
+        rsc.setFechaPublicacion(obj[1].toString());
+        rsc.setNombreCaso(obj[2].toString());
+        rsc.setRegionPrincial(obj[3] == null? "": obj[3].toString());
+        rsc.setProvinciaPrincial(obj[4] == null? "": obj[4].toString());
+        rsc.setDistritoPrincial(obj[5] == null? "": obj[5].toString());
+        rsc.setTipologia(obj[6] == null? "": obj[6].toString());
+        rsc.setEstado(obj[7] == null? "": obj[7].toString());
+        rsc.setActividad(obj[8] == null? "": obj[8].toString());
+        rsc.setFase(obj[9] == null? "": obj[9].toString());
+        return rsc;
+    }
+    
+    public List<ReporteSimcoActor> actoresPorCaso(Long idCaso){
+        List<Object[]> listaReporteActorPorCaso = simcoFacade.buscarActorPorCaso(idCaso);
+        List<ReporteSimcoActor> lista = new ArrayList<>();
+        for (Object[] obj : listaReporteActorPorCaso) {
+            ReporteSimcoActor ac = new ReporteSimcoActor();
+            if(StringUtils.equals(obj[8].toString(), "PE")){
+                StringBuilder nombre = new StringBuilder();
+                if(obj[5] != null){
+                    nombre.append(obj[5].toString()+" ");
+                }
+                if(obj[6] != null){
+                    nombre.append(obj[6].toString()+" ");
+                }
+                if(obj[7] != null){
+                    nombre.append(obj[7].toString());
+                }
+                ac.setNombreActor(nombre.toString());
+            }else{
+                if(obj[5] != null){
+                    ac.setNombreActor(obj[5].toString());
+                }
+            }
+            ac.setTipoActor(obj[2] == null? "" : obj[2].toString());
+            lista.add(ac);
+        }
+        return lista;
+    }
+    
+    public List<ReporteSimcoActividad> actividadesPorCaso(Long idCaso){
+        List<Object[]> listaReporteActividad = simcoFacade.actividadesPorCaso(idCaso);
+        List<ReporteSimcoActividad> lista = new ArrayList<>();
+        for (Object[] obj : listaReporteActividad) {
+            ReporteSimcoActividad actividad = new ReporteSimcoActividad();
+            actividad.setIdActividad(Long.parseLong(obj[0].toString()));
+            actividad.setTipoActividad(obj[1].toString());
+            actividad.setNombreActividad(obj[2].toString());
+            actividad.setRutaUsuarioRegistro(obj[3] == null? "" :obj[3].toString());
+            actividad.setUsuarioRegistro(obj[4].toString());
+            actividad.setFechaInicio(obj[5].toString());
+            actividad.setRuta(obj[6] == null? "" :obj[6].toString());
+            actividad.setFechaRegistro(obj[7].toString());
+            actividad.setFechaModificacion(obj[8].toString());
+            actividad.setDescripcion(obj[9] == null? "" :obj[9].toString());
+            lista.add(actividad);
+        }
+        return lista;
+    }
+    
+    public Long contadorAcontecimientoPorCaso(Long idCaso){
+        Object obj = simcoFacade.contadorAcontecimientosPorCaso(idCaso);
+        BigDecimal  bg2 = (BigDecimal) obj;
+        return bg2.longValue();
+    }
+    
+    public Long contadorActuacionesDefensorialesPorCaso(Long idCaso){
+        Object obj = simcoFacade.contadorActuacionesDefensorialesPorCaso(idCaso);
         BigDecimal  bg2 = (BigDecimal) obj;
         return bg2.longValue();
     }

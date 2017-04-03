@@ -5,6 +5,8 @@
  */
 package gob.pe.defensoria.servlet;
 
+import gob.pe.defensoria.reporte.ReporteSimcoActividad;
+import gob.pe.defensoria.reporte.ReporteSimcoActor;
 import gob.pe.defensoria.reporte.ReporteSimcoCaso;
 import gob.pe.defensoria.service.SimcoService;
 import java.io.IOException;
@@ -100,6 +102,23 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
             }
             if (idCodigoCaso != null && !StringUtils.equals(idCodigoCaso, "")) {
                 request.setAttribute("idCodigoCaso", idCodigoCaso);
+                ReporteSimcoCaso caso = service.buscarCaso(Long.parseLong(idCodigoCaso));
+                request.setAttribute("nombreCaso", caso.getNombreCaso());
+                request.setAttribute("region", caso.getRegionPrincial());
+                request.setAttribute("provincia", caso.getProvinciaPrincial());
+                request.setAttribute("distrito", caso.getDistritoPrincial());
+                request.setAttribute("tipologia", caso.getTipologia());
+                request.setAttribute("estado", caso.getEstado());
+                request.setAttribute("tipoActividad", caso.getActividad());
+                request.setAttribute("fase", caso.getFase());
+                
+                request.setAttribute("fechaPublicacion", caso.getFechaPublicacion());
+                request.setAttribute("contadorActuacionDefensorialPorCaso", service.contadorActuacionesDefensorialesPorCaso(Long.parseLong(idCodigoCaso)));
+                request.setAttribute("contadorAcontecimientoPorCaso", service.contadorAcontecimientoPorCaso(Long.parseLong(idCodigoCaso)));
+                List<ReporteSimcoActividad> lista = service.actividadesPorCaso(Long.parseLong(idCodigoCaso));
+                List<ReporteSimcoActor> lista2 = service.actoresPorCaso(Long.parseLong(idCodigoCaso));
+                request.setAttribute("listaActividades", lista);
+                request.setAttribute("listaActores", lista2);
                 request.getRequestDispatcher("/fichaCaso.jsp").forward(request, response);
                 return;
             }

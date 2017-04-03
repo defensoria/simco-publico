@@ -43,7 +43,7 @@ public class SimcoFacade {
         List<Object[]> lst = query.getResultList();
         return lst;
     }
-    
+
     public Object contarCasoXnombreCodigo(Filtro filtroCaso) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT COUNT(DISTINCT N_ID_CASO) FROM SIMCO_REPORTE_CASO A ");
@@ -54,7 +54,7 @@ public class SimcoFacade {
         Object contador = query.getSingleResult();
         return contador;
     }
-    
+
     public List<Object[]> buscarActorXnombre(Filtro filtroActor) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT DISTINCT A.* FROM ( ");
@@ -70,7 +70,7 @@ public class SimcoFacade {
         List<Object[]> lst = query.getResultList();
         return lst;
     }
-    
+
     public Object contarActorXnombreCodigo(Filtro filtroActor) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT COUNT(DISTINCT N_ID_ACTOR) FROM SIMCO_REPORTE_ACTOR A ");
@@ -84,9 +84,10 @@ public class SimcoFacade {
 
     public List<Object[]> listarParametro(String codigoPadre) {
         StringBuilder sb = new StringBuilder();
-        sb.append(" SELECT * FROM SIMCO_PARAMETRO WHERE PADRE_PARAMETRO = ? " );
-        if(StringUtils.equals(codigoPadre, "120"))
+        sb.append(" SELECT * FROM SIMCO_PARAMETRO WHERE PADRE_PARAMETRO = ? ");
+        if (StringUtils.equals(codigoPadre, "120")) {
             sb.append(" AND VALOR_PARAMETRO NOT IN ('01','02','03','06','07') ");
+        }
         sb.append(" ORDER BY NUM_PARAMETRO");
         Query query = em.createNativeQuery(sb.toString());
         query.setParameter(1, codigoPadre);
@@ -119,19 +120,19 @@ public class SimcoFacade {
         sb.append("LEFT JOIN SIMCO_PARAMETRO G ON G.VALOR_PARAMETRO = F.C_TIPOCASO AND G.PADRE_PARAMETRO = 90         ");
         sb.append("LEFT JOIN SIMCO_PARAMETRO H ON H.VALOR_PARAMETRO = F.C_SUBTIPOCASO AND H.PADRE_PARAMETRO = 130 ");
         sb.append("LEFT JOIN ( ");
-sb.append("SELECT I1.* FROM SIMCO_REPORTE_ACTIVIDAD I1  ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X1 ON I1.N_ID_CODIGOCARGA = X1.N_ID_REPORTE AND X1.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X1.C_MES = TO_CHAR(SYSDATE, 'MM') AND X1.C_IND_ACTIVO = 'A'  ");
-sb.append("WHERE I1.C_TIPO = 'AC'  ");
-sb.append(") I ON A.N_ID_ACONTECIMIENTO = I.N_ID_ACTIVIDAD ");
-sb.append("LEFT JOIN ( ");
-sb.append("SELECT L1.* FROM SIMCO_REPORTE_ACTIVIDAD_ACTOR L1  ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X2 ON L1.N_ID_CODIGOCARGA = X2.N_ID_REPORTE AND X2.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X2.C_MES = TO_CHAR(SYSDATE, 'MM') AND X2.C_IND_ACTIVO = 'A'  ");
-sb.append(") L ON A.N_ID_ACTIVIDAD = L.N_ID_ACTIVIDAD   ");
-sb.append("LEFT JOIN ( ");
-sb.append("SELECT M1.* FROM SIMCO_REPORTE_ACTOR M1  ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X3 ON M1.N_ID_CODIGOCARGA = X3.N_ID_REPORTE AND X3.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X3.C_MES = TO_CHAR(SYSDATE, 'MM') AND X3.C_IND_ACTIVO = 'A'  ");
-sb.append(") M ON M.N_ID_ACTOR = L.N_ID_ACTOR  ");
-sb.append("WHERE 1 = 1 ");
+        sb.append("SELECT I1.* FROM SIMCO_REPORTE_ACTIVIDAD I1  ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X1 ON I1.N_ID_CODIGOCARGA = X1.N_ID_REPORTE AND X1.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X1.C_MES = TO_CHAR(SYSDATE, 'MM') AND X1.C_IND_ACTIVO = 'A'  ");
+        sb.append("WHERE I1.C_TIPO = 'AC'  ");
+        sb.append(") I ON A.N_ID_ACONTECIMIENTO = I.N_ID_ACTIVIDAD ");
+        sb.append("LEFT JOIN ( ");
+        sb.append("SELECT L1.* FROM SIMCO_REPORTE_ACTIVIDAD_ACTOR L1  ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X2 ON L1.N_ID_CODIGOCARGA = X2.N_ID_REPORTE AND X2.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X2.C_MES = TO_CHAR(SYSDATE, 'MM') AND X2.C_IND_ACTIVO = 'A'  ");
+        sb.append(") L ON A.N_ID_ACTIVIDAD = L.N_ID_ACTIVIDAD   ");
+        sb.append("LEFT JOIN ( ");
+        sb.append("SELECT M1.* FROM SIMCO_REPORTE_ACTOR M1  ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X3 ON M1.N_ID_CODIGOCARGA = X3.N_ID_REPORTE AND X3.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X3.C_MES = TO_CHAR(SYSDATE, 'MM') AND X3.C_IND_ACTIVO = 'A'  ");
+        sb.append(") M ON M.N_ID_ACTOR = L.N_ID_ACTOR  ");
+        sb.append("WHERE 1 = 1 ");
 
         if (StringUtils.isNoneBlank(reporteSimcoActividad.getAnho()) && !StringUtils.equals(reporteSimcoActividad.getAnho().trim(), "0")) {
             sb.append(" AND TO_CHAR(F.D_FECHACREACION, 'yyyy') = " + reporteSimcoActividad.getAnho() + "");
@@ -246,7 +247,7 @@ sb.append("WHERE 1 = 1 ");
         sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X4 ON L.N_ID_CODIGOCARGA = X4.N_ID_REPORTE AND X4.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X4.C_MES = TO_CHAR(SYSDATE, 'MM') AND X4.C_IND_ACTIVO = 'A'  ");
         sb.append(") L ON K.N_ID_ACTOR = L.N_ID_ACTOR ");
         sb.append("WHERE A.C_INDVIGENTE = 'A' AND A.C_INDAPROBADO = 'A' AND A.C_TIPOESTADO IN ('04','05') ");
-        
+
         if (StringUtils.isNoneBlank(reporteSimcoCaso.getAnho()) && !StringUtils.equals(reporteSimcoCaso.getAnho().trim(), "0")) {
             sb.append(" AND TO_CHAR(A.D_FECHAINICIO, 'yyyy') = ").append(reporteSimcoCaso.getAnho()).append("");
         }
@@ -274,38 +275,38 @@ sb.append("WHERE 1 = 1 ");
     public List<Object[]> reporteVictima(ReporteSimcoVictima reporteSimcoVictima) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT DISTINCT  A.C_APEPATERNO||' '||A.C_APEMATERNO||' '||A.C_NOMBRE NOMBRE_COMPLETO, A.N_EDAD, A.C_SEXO, B.NOMBRE_PARAMETRO TIPO_VICTIMA, ");
-sb.append("C.NOMBRE_PARAMETRO TIPOESTADO, D.C_NOMACTIVIDAD, D.C_TIPOACONTECIMIENTO, E.C_DESCDPTO, A.N_NOIDENTIFICADO, G.C_CODIGOCASO, G.C_NOMCASO,  ");
-sb.append("H.NOMBRE_PARAMETRO TIPOCASO, I.NOMBRE_PARAMETRO TIPOACTIVIDAD, D.C_NOMACTIVIDAD, D.C_CODIGOACTIVIDAD, J.C_DESCPROV, K.C_DESCDSTRO, A.C_DNI,  D.N_ID_ACTIVIDAD, A.N_ID_VICTIMAS  ");
-sb.append("FROM SIMCO_REPORTE_ACTIVIDAD_VICT A  ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON A.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A'  ");
-sb.append("LEFT JOIN SIMCO_PARAMETRO B ON B.VALOR_PARAMETRO = A.C_TIPO AND B.PADRE_PARAMETRO = 200   ");
-sb.append("LEFT JOIN SIMCO_PARAMETRO C ON C.VALOR_PARAMETRO = A.C_TIPOESTADO AND C.PADRE_PARAMETRO = 190   ");
-sb.append("INNER JOIN   ");
-sb.append("(SELECT * FROM SIMCO_REPORTE_ACTIVIDAD S  ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X3 ON S.N_ID_CODIGOCARGA = X3.N_ID_REPORTE AND X3.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X3.C_MES = TO_CHAR(SYSDATE, 'MM') AND X3.C_IND_ACTIVO = 'A'   ");
-sb.append(") D ON A.N_ID_ACTIVIDAD = D.N_ID_ACTIVIDAD AND D.C_TIPO = 'AC'  ");
-sb.append("LEFT JOIN SIMCO_UBIGEO_DPTO E ON D.CIDDEPART = E.C_ID_DPTO  ");
-sb.append("LEFT JOIN SIMCO_UBIGEO_PROV J ON D.CIDPROV = J.C_ID_PROV AND E.C_ID_DPTO = J.C_ID_DPTO ");
-sb.append("LEFT JOIN SIMCO_UBIGEO_DSTRO K ON D.CIDDISTR = K.C_ID_DSTRO AND E.C_ID_DPTO = K.C_ID_DPTO AND J.C_ID_PROV = K.C_ID_PROV  ");
-sb.append("LEFT JOIN (SELECT * FROM SIMCO_REPORTE_CASO_ACTIVIDAD S1    ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X4 ON S1.N_ID_CODIGOCARGA = X4.N_ID_REPORTE AND X4.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X4.C_MES = TO_CHAR(SYSDATE, 'MM') AND X4.C_IND_ACTIVO = 'A'   ");
-sb.append(") F  ON F.N_ID_ACTIVIDAD = D.N_ID_ACTIVIDAD AND F.C_ESTADOACTCASO = 'ACT' ");
-sb.append("LEFT JOIN  ");
-sb.append("(SELECT * FROM SIMCO_REPORTE_CASO S2  ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X5 ON S2.N_ID_CODIGOCARGA = X5.N_ID_REPORTE AND X5.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X5.C_MES = TO_CHAR(SYSDATE, 'MM') AND X5.C_IND_ACTIVO = 'A'   ");
-sb.append(")G ON G.N_ID_CASO = F.N_ID_CASO AND G.C_INDVIGENTE= 'A' AND G.N_ID_CASO IS NOT NULL ");
-sb.append("LEFT JOIN SIMCO_PARAMETRO H ON H.VALOR_PARAMETRO = G.C_TIPOCASO AND H.PADRE_PARAMETRO = 90          ");
-sb.append("LEFT JOIN SIMCO_PARAMETRO I ON I.VALOR_PARAMETRO = G.C_SUBTIPOCASO AND I.PADRE_PARAMETRO = 130  ");
-sb.append("LEFT JOIN (  ");
-sb.append("SELECT J.* FROM SIMCO_REPORTE_ACTIVIDAD_ACTOR J   ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X1 ON J.N_ID_CODIGOCARGA = X1.N_ID_REPORTE AND X1.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X1.C_MES = TO_CHAR(SYSDATE, 'MM') AND X1.C_IND_ACTIVO = 'A'   ");
-sb.append(") J1 ON J1.N_ID_ACTIVIDAD = D.N_ID_ACTIVIDAD ");
-sb.append("LEFT JOIN (  ");
-sb.append("SELECT K.* FROM SIMCO_REPORTE_ACTOR K   ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X2 ON K.N_ID_CODIGOCARGA = X2.N_ID_REPORTE AND X2.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X2.C_MES = TO_CHAR(SYSDATE, 'MM') AND X2.C_IND_ACTIVO = 'A'   ");
-sb.append(") K1 ON K1.N_ID_ACTOR = J1.N_ID_ACTOR   ");
-sb.append("WHERE 1 = 1 ");
-        
+        sb.append("C.NOMBRE_PARAMETRO TIPOESTADO, D.C_NOMACTIVIDAD, D.C_TIPOACONTECIMIENTO, E.C_DESCDPTO, A.N_NOIDENTIFICADO, G.C_CODIGOCASO, G.C_NOMCASO,  ");
+        sb.append("H.NOMBRE_PARAMETRO TIPOCASO, I.NOMBRE_PARAMETRO TIPOACTIVIDAD, D.C_NOMACTIVIDAD, D.C_CODIGOACTIVIDAD, J.C_DESCPROV, K.C_DESCDSTRO, A.C_DNI,  D.N_ID_ACTIVIDAD, A.N_ID_VICTIMAS  ");
+        sb.append("FROM SIMCO_REPORTE_ACTIVIDAD_VICT A  ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON A.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A'  ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO B ON B.VALOR_PARAMETRO = A.C_TIPO AND B.PADRE_PARAMETRO = 200   ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO C ON C.VALOR_PARAMETRO = A.C_TIPOESTADO AND C.PADRE_PARAMETRO = 190   ");
+        sb.append("INNER JOIN   ");
+        sb.append("(SELECT * FROM SIMCO_REPORTE_ACTIVIDAD S  ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X3 ON S.N_ID_CODIGOCARGA = X3.N_ID_REPORTE AND X3.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X3.C_MES = TO_CHAR(SYSDATE, 'MM') AND X3.C_IND_ACTIVO = 'A'   ");
+        sb.append(") D ON A.N_ID_ACTIVIDAD = D.N_ID_ACTIVIDAD AND D.C_TIPO = 'AC'  ");
+        sb.append("LEFT JOIN SIMCO_UBIGEO_DPTO E ON D.CIDDEPART = E.C_ID_DPTO  ");
+        sb.append("LEFT JOIN SIMCO_UBIGEO_PROV J ON D.CIDPROV = J.C_ID_PROV AND E.C_ID_DPTO = J.C_ID_DPTO ");
+        sb.append("LEFT JOIN SIMCO_UBIGEO_DSTRO K ON D.CIDDISTR = K.C_ID_DSTRO AND E.C_ID_DPTO = K.C_ID_DPTO AND J.C_ID_PROV = K.C_ID_PROV  ");
+        sb.append("LEFT JOIN (SELECT * FROM SIMCO_REPORTE_CASO_ACTIVIDAD S1    ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X4 ON S1.N_ID_CODIGOCARGA = X4.N_ID_REPORTE AND X4.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X4.C_MES = TO_CHAR(SYSDATE, 'MM') AND X4.C_IND_ACTIVO = 'A'   ");
+        sb.append(") F  ON F.N_ID_ACTIVIDAD = D.N_ID_ACTIVIDAD AND F.C_ESTADOACTCASO = 'ACT' ");
+        sb.append("LEFT JOIN  ");
+        sb.append("(SELECT * FROM SIMCO_REPORTE_CASO S2  ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X5 ON S2.N_ID_CODIGOCARGA = X5.N_ID_REPORTE AND X5.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X5.C_MES = TO_CHAR(SYSDATE, 'MM') AND X5.C_IND_ACTIVO = 'A'   ");
+        sb.append(")G ON G.N_ID_CASO = F.N_ID_CASO AND G.C_INDVIGENTE= 'A' AND G.N_ID_CASO IS NOT NULL ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO H ON H.VALOR_PARAMETRO = G.C_TIPOCASO AND H.PADRE_PARAMETRO = 90          ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO I ON I.VALOR_PARAMETRO = G.C_SUBTIPOCASO AND I.PADRE_PARAMETRO = 130  ");
+        sb.append("LEFT JOIN (  ");
+        sb.append("SELECT J.* FROM SIMCO_REPORTE_ACTIVIDAD_ACTOR J   ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X1 ON J.N_ID_CODIGOCARGA = X1.N_ID_REPORTE AND X1.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X1.C_MES = TO_CHAR(SYSDATE, 'MM') AND X1.C_IND_ACTIVO = 'A'   ");
+        sb.append(") J1 ON J1.N_ID_ACTIVIDAD = D.N_ID_ACTIVIDAD ");
+        sb.append("LEFT JOIN (  ");
+        sb.append("SELECT K.* FROM SIMCO_REPORTE_ACTOR K   ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X2 ON K.N_ID_CODIGOCARGA = X2.N_ID_REPORTE AND X2.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X2.C_MES = TO_CHAR(SYSDATE, 'MM') AND X2.C_IND_ACTIVO = 'A'   ");
+        sb.append(") K1 ON K1.N_ID_ACTOR = J1.N_ID_ACTOR   ");
+        sb.append("WHERE 1 = 1 ");
+
         if (StringUtils.isNoneBlank(reporteSimcoVictima.getAnho()) && !StringUtils.equals(reporteSimcoVictima.getAnho().trim(), "0")) {
             sb.append(" AND TO_CHAR(A.D_FECHAREGISTRO, 'yyyy') = ").append(reporteSimcoVictima.getAnho()).append("");
         }
@@ -328,7 +329,7 @@ sb.append("WHERE 1 = 1 ");
             sb.append(" AND K1.N_ID_ACTOR  = " + reporteSimcoVictima.getIdActor());
         }
         if (StringUtils.isNotBlank(reporteSimcoVictima.getTipoActor())) {
-            sb.append(" AND K1.C_TIPOGENERAL  = '" + reporteSimcoVictima.getTipoActor()+"'");
+            sb.append(" AND K1.C_TIPOGENERAL  = '" + reporteSimcoVictima.getTipoActor() + "'");
         }
         Query query = em.createNativeQuery(sb.toString());
         List<Object[]> lst = query.getResultList();
@@ -338,54 +339,54 @@ sb.append("WHERE 1 = 1 ");
     public List<Object[]> reporteActor(ReporteSimcoActor reporteSimcoActor) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT DISTINCT A.C_NOMACTOR||' '||nvl(A.C_APELLIDOPATACTOR, '')||' '||nvl(A.C_APELLIDOMATACTOR, '') NOMACTOR, A.C_TIPOGENERAL,   ");
-sb.append("B.C_DESCDPTO, A.N_ID_ACTOR, A.C_DNIACTOR, A.C_RUCACTOR, M1.C_NOMBREPARAMETRO DES_TIPOPOBLACION, M2.C_NOMBREPARAMETRO DES_SUBTIPO1POBLACION,   ");
-sb.append("M3.C_NOMBREPARAMETRO DES_SUBTIPO2POBLACION, M7.C_NOMBREPARAMETRO DES_TIPOORGANIZACION,  M8.C_NOMBREPARAMETRO DES_SUBTIPO1ORGANIZACION,    ");
-sb.append("M9.C_NOMBREPARAMETRO DES_SUBTIPO2ORGANIZACION, M10.C_NOMBREPARAMETRO DES_TIPOEMPRESA, M11.C_NOMBREPARAMETRO DES_SUBTIPO1EMPRESA,   ");
-sb.append("M12.C_NOMBREPARAMETRO DES_SUBTIPO2EMPRESA,M13.C_NOMBREPARAMETRO DES_SUBTIPO3EMPRESA, M4.C_NOMBREPARAMETRO DES_TIPOESTADO, M5.C_NOMBREPARAMETRO DES_SUBTIPO1ESTADO,   ");
-sb.append("M6.C_NOMBREPARAMETRO DES_SUBTIPO2ESTADO, A.C_CLASIFICACION, F.NOMBRE_PARAMETRO DES_EMPRESAAMBITO, A.C_SEXO, G.C_DESCPROV, H.C_DESCDSTRO    ");
-sb.append("FROM SIMCO_REPORTE_ACTOR A   ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON A.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A'  ");
-sb.append("INNER JOIN ( ");
- sb.append("SELECT C1.* FROM SIMCO_REPORTE_ACTIVIDAD_ACTOR C1  ");
- sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X1 ON C1.N_ID_CODIGOCARGA = X1.N_ID_REPORTE AND X1.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X1.C_MES = TO_CHAR(SYSDATE, 'MM') AND X1.C_IND_ACTIVO = 'A'  ");
-sb.append(") C ON A.N_ID_ACTOR = C.N_ID_ACTOR  ");
-sb.append("INNER JOIN ( ");
-  sb.append("SELECT D1.* FROM SIMCO_REPORTE_CASO_ACTIVIDAD D1  ");
-  sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X2 ON D1.N_ID_CODIGOCARGA = X2.N_ID_REPORTE AND X2.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X2.C_MES = TO_CHAR(SYSDATE, 'MM') AND X2.C_IND_ACTIVO = 'A'  ");
-sb.append(") D ON C.N_ID_ACTIVIDAD = D.N_ID_ACTIVIDAD  ");
-sb.append("INNER JOIN( ");
-  sb.append("SELECT E1.* FROM SIMCO_REPORTE_CASO E1 ");
-  sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X3 ON E1.N_ID_CODIGOCARGA = X3.N_ID_REPORTE AND X3.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X3.C_MES = TO_CHAR(SYSDATE, 'MM') AND X3.C_IND_ACTIVO = 'A' ");
-  sb.append("WHERE E1.C_INDVIGENTE= 'A' AND E1.C_INDAPROBADO = 'A' ");
-sb.append(") E ON D.N_ID_CASO = E.N_ID_CASO ");
-sb.append("LEFT JOIN SIMCO_UBIGEO_DPTO B ON A.C_IDDEPARTAMENTO = B.C_ID_DPTO ");
-sb.append("LEFT JOIN SIMCO_UBIGEO_PROV G ON A.C_IDPROVINCIA = G.C_ID_PROV AND A.C_IDDEPARTAMENTO = G.C_ID_DPTO ");
-sb.append("LEFT JOIN SIMCO_UBIGEO_DSTRO H ON A.C_IDDISTRITO = H.C_ID_DSTRO AND A.C_IDDEPARTAMENTO = H.C_ID_DPTO AND A.C_IDPROVINCIA = H.C_ID_PROV ");
-sb.append("LEFT JOIN ( ");
-sb.append("SELECT A2.C_TIPOACONTECIMIENTO, B2.N_ID_CASO, A2.N_ID_ACTIVIDAD FROM SIMCO_REPORTE_ACTIVIDAD A2 ");
-sb.append("INNER JOIN SIMCO_REPORTE_CASO_ACTIVIDAD B2 ON A2.N_ID_ACTIVIDAD = B2.N_ID_ACTIVIDAD ");
-sb.append(") F ON E.N_ID_CASO = F.N_ID_CASO ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M1 ON A.C_TIPOPOBLACION = M1.C_VALORPARAMETRO AND M1.N_GRUPO = 1 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M2 ON A.C_SUBTIPO1POBLACION = M2.C_VALORPARAMETRO AND M2.N_GRUPO = 2 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M3 ON A.C_SUBTIPO2POBLACION = M3.C_VALORPARAMETRO AND M3.N_GRUPO = 3 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M4 ON A.C_TIPOESTADO = M4.C_VALORPARAMETRO AND M4.N_GRUPO = 4 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M5 ON A.C_SUBTIPO1ESTADO = M5.C_VALORPARAMETRO AND M5.N_GRUPO = 5 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M6 ON A.C_SUBTIPO2ESTADO = M6.C_VALORPARAMETRO AND M6.N_GRUPO = 6 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M7 ON A.C_TIPOORGANIZACION = M7.C_VALORPARAMETRO AND M7.N_GRUPO = 7 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M8 ON A.C_SUBTIPO1ORGANIZACION = M8.C_VALORPARAMETRO AND M8.N_GRUPO = 8 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M9 ON A.C_SUBTIPO2ORGANIZACION = M9.C_VALORPARAMETRO AND M9.N_GRUPO = 9 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M10 ON A.C_TIPOEMPRESA = M10.C_VALORPARAMETRO AND M10.N_GRUPO = 10 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M11 ON A.C_SUBTIPO1EMPRESA = M11.C_VALORPARAMETRO AND M11.N_GRUPO = 11 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M12 ON A.C_SUBTIPO2EMPRESA = M12.C_VALORPARAMETRO AND M12.N_GRUPO = 12 ");
-sb.append("LEFT JOIN SIMCO_MAESTROS M13 ON A.C_SUBTIPO3EMPRESA = M13.C_VALORPARAMETRO AND M13.N_GRUPO = 13 ");
-sb.append("LEFT JOIN SIMCO_PARAMETRO F ON F.VALOR_PARAMETRO = A.C_EMPRESAAMBITO AND F.PADRE_PARAMETRO = 170 ");
-sb.append("WHERE 1 = 1  ");
+        sb.append("B.C_DESCDPTO, A.N_ID_ACTOR, A.C_DNIACTOR, A.C_RUCACTOR, M1.C_NOMBREPARAMETRO DES_TIPOPOBLACION, M2.C_NOMBREPARAMETRO DES_SUBTIPO1POBLACION,   ");
+        sb.append("M3.C_NOMBREPARAMETRO DES_SUBTIPO2POBLACION, M7.C_NOMBREPARAMETRO DES_TIPOORGANIZACION,  M8.C_NOMBREPARAMETRO DES_SUBTIPO1ORGANIZACION,    ");
+        sb.append("M9.C_NOMBREPARAMETRO DES_SUBTIPO2ORGANIZACION, M10.C_NOMBREPARAMETRO DES_TIPOEMPRESA, M11.C_NOMBREPARAMETRO DES_SUBTIPO1EMPRESA,   ");
+        sb.append("M12.C_NOMBREPARAMETRO DES_SUBTIPO2EMPRESA,M13.C_NOMBREPARAMETRO DES_SUBTIPO3EMPRESA, M4.C_NOMBREPARAMETRO DES_TIPOESTADO, M5.C_NOMBREPARAMETRO DES_SUBTIPO1ESTADO,   ");
+        sb.append("M6.C_NOMBREPARAMETRO DES_SUBTIPO2ESTADO, A.C_CLASIFICACION, F.NOMBRE_PARAMETRO DES_EMPRESAAMBITO, A.C_SEXO, G.C_DESCPROV, H.C_DESCDSTRO    ");
+        sb.append("FROM SIMCO_REPORTE_ACTOR A   ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON A.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A'  ");
+        sb.append("INNER JOIN ( ");
+        sb.append("SELECT C1.* FROM SIMCO_REPORTE_ACTIVIDAD_ACTOR C1  ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X1 ON C1.N_ID_CODIGOCARGA = X1.N_ID_REPORTE AND X1.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X1.C_MES = TO_CHAR(SYSDATE, 'MM') AND X1.C_IND_ACTIVO = 'A'  ");
+        sb.append(") C ON A.N_ID_ACTOR = C.N_ID_ACTOR  ");
+        sb.append("INNER JOIN ( ");
+        sb.append("SELECT D1.* FROM SIMCO_REPORTE_CASO_ACTIVIDAD D1  ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X2 ON D1.N_ID_CODIGOCARGA = X2.N_ID_REPORTE AND X2.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X2.C_MES = TO_CHAR(SYSDATE, 'MM') AND X2.C_IND_ACTIVO = 'A'  ");
+        sb.append(") D ON C.N_ID_ACTIVIDAD = D.N_ID_ACTIVIDAD  ");
+        sb.append("INNER JOIN( ");
+        sb.append("SELECT E1.* FROM SIMCO_REPORTE_CASO E1 ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X3 ON E1.N_ID_CODIGOCARGA = X3.N_ID_REPORTE AND X3.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X3.C_MES = TO_CHAR(SYSDATE, 'MM') AND X3.C_IND_ACTIVO = 'A' ");
+        sb.append("WHERE E1.C_INDVIGENTE= 'A' AND E1.C_INDAPROBADO = 'A' ");
+        sb.append(") E ON D.N_ID_CASO = E.N_ID_CASO ");
+        sb.append("LEFT JOIN SIMCO_UBIGEO_DPTO B ON A.C_IDDEPARTAMENTO = B.C_ID_DPTO ");
+        sb.append("LEFT JOIN SIMCO_UBIGEO_PROV G ON A.C_IDPROVINCIA = G.C_ID_PROV AND A.C_IDDEPARTAMENTO = G.C_ID_DPTO ");
+        sb.append("LEFT JOIN SIMCO_UBIGEO_DSTRO H ON A.C_IDDISTRITO = H.C_ID_DSTRO AND A.C_IDDEPARTAMENTO = H.C_ID_DPTO AND A.C_IDPROVINCIA = H.C_ID_PROV ");
+        sb.append("LEFT JOIN ( ");
+        sb.append("SELECT A2.C_TIPOACONTECIMIENTO, B2.N_ID_CASO, A2.N_ID_ACTIVIDAD FROM SIMCO_REPORTE_ACTIVIDAD A2 ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CASO_ACTIVIDAD B2 ON A2.N_ID_ACTIVIDAD = B2.N_ID_ACTIVIDAD ");
+        sb.append(") F ON E.N_ID_CASO = F.N_ID_CASO ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M1 ON A.C_TIPOPOBLACION = M1.C_VALORPARAMETRO AND M1.N_GRUPO = 1 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M2 ON A.C_SUBTIPO1POBLACION = M2.C_VALORPARAMETRO AND M2.N_GRUPO = 2 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M3 ON A.C_SUBTIPO2POBLACION = M3.C_VALORPARAMETRO AND M3.N_GRUPO = 3 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M4 ON A.C_TIPOESTADO = M4.C_VALORPARAMETRO AND M4.N_GRUPO = 4 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M5 ON A.C_SUBTIPO1ESTADO = M5.C_VALORPARAMETRO AND M5.N_GRUPO = 5 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M6 ON A.C_SUBTIPO2ESTADO = M6.C_VALORPARAMETRO AND M6.N_GRUPO = 6 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M7 ON A.C_TIPOORGANIZACION = M7.C_VALORPARAMETRO AND M7.N_GRUPO = 7 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M8 ON A.C_SUBTIPO1ORGANIZACION = M8.C_VALORPARAMETRO AND M8.N_GRUPO = 8 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M9 ON A.C_SUBTIPO2ORGANIZACION = M9.C_VALORPARAMETRO AND M9.N_GRUPO = 9 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M10 ON A.C_TIPOEMPRESA = M10.C_VALORPARAMETRO AND M10.N_GRUPO = 10 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M11 ON A.C_SUBTIPO1EMPRESA = M11.C_VALORPARAMETRO AND M11.N_GRUPO = 11 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M12 ON A.C_SUBTIPO2EMPRESA = M12.C_VALORPARAMETRO AND M12.N_GRUPO = 12 ");
+        sb.append("LEFT JOIN SIMCO_MAESTROS M13 ON A.C_SUBTIPO3EMPRESA = M13.C_VALORPARAMETRO AND M13.N_GRUPO = 13 ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO F ON F.VALOR_PARAMETRO = A.C_EMPRESAAMBITO AND F.PADRE_PARAMETRO = 170 ");
+        sb.append("WHERE 1 = 1  ");
 
         if (StringUtils.isNoneBlank(reporteSimcoActor.getAnho()) && !StringUtils.equals(reporteSimcoActor.getAnho().trim(), "0")) {
             sb.append(" AND TO_CHAR(E.D_FECHAINICIO, 'YYYY') = " + reporteSimcoActor.getAnho());
         }
         if (StringUtils.isNotBlank(reporteSimcoActor.getCodigoCaso())) {
-            sb.append(" AND E.C_CODIGOCASO = '" + reporteSimcoActor.getCodigoCaso()+"'");
+            sb.append(" AND E.C_CODIGOCASO = '" + reporteSimcoActor.getCodigoCaso() + "'");
         }
         if (StringUtils.isNotBlank(reporteSimcoActor.getTipologia())) {
             sb.append(" AND E.C_TIPOCASO = " + reporteSimcoActor.getTipologia());
@@ -403,7 +404,7 @@ sb.append("WHERE 1 = 1  ");
             sb.append(" AND A.N_ID_ACTOR  = " + reporteSimcoActor.getIdActor());
         }
         if (StringUtils.isNotBlank(reporteSimcoActor.getTipoActor())) {
-            sb.append(" AND A.C_TIPOGENERAL  = '" + reporteSimcoActor.getTipoActor()+"'");
+            sb.append(" AND A.C_TIPOGENERAL  = '" + reporteSimcoActor.getTipoActor() + "'");
         }
         Query query = em.createNativeQuery(sb.toString());
         List<Object[]> lst = query.getResultList();
@@ -413,18 +414,18 @@ sb.append("WHERE 1 = 1  ");
     public Integer contarActorAcontecimiento(Long idActor) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT COUNT(DISTINCT A.N_ID_ACTIVIDAD) FROM SIMCO_REPORTE_ACTIVIDAD A  ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON A.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A'  ");
-sb.append("INNER JOIN (SELECT B1.* FROM SIMCO_REPORTE_ACTIVIDAD_ACTOR B1   ");
-sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON B1.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A' ) B ");
-sb.append("ON A.N_ID_ACTIVIDAD = B.N_ID_ACTIVIDAD ");
-sb.append("WHERE A.C_TIPO = 'AC' AND B.N_ID_ACTOR = ? ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON A.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A'  ");
+        sb.append("INNER JOIN (SELECT B1.* FROM SIMCO_REPORTE_ACTIVIDAD_ACTOR B1   ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON B1.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A' ) B ");
+        sb.append("ON A.N_ID_ACTIVIDAD = B.N_ID_ACTIVIDAD ");
+        sb.append("WHERE A.C_TIPO = 'AC' AND B.N_ID_ACTOR = ? ");
         Query query = em.createNativeQuery(sb.toString());
         query.setParameter(1, idActor);
-        Object cont =  query.getSingleResult();
+        Object cont = query.getSingleResult();
         return Integer.parseInt(cont.toString());
     }
-    
-    public List<Object[]> contadorCasosEstado(String estadoCaso, String anho){
+
+    public List<Object[]> contadorCasosEstado(String estadoCaso, String anho) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT COUNT(A.N_ID_CASO) TOTAL, TO_CHAR(A.D_FECHAINICIO, 'YYYY-MM') MES  FROM SIMCO_REPORTE_CASO A   ");
         sb.append("INNER JOIN SIMCO_REPORTE_CODIGO B ON A.N_ID_CODIGOCARGA = B.N_ID_REPORTE AND B.C_ANHO||B.C_MES = TO_CHAR(SYSDATE, 'YYMM') AND B.C_IND_ACTIVO = 'A' ");
@@ -433,11 +434,11 @@ sb.append("WHERE A.C_TIPO = 'AC' AND B.N_ID_ACTOR = ? ");
         Query query = em.createNativeQuery(sb.toString());
         query.setParameter(1, estadoCaso);
         query.setParameter(2, anho);
-        List<Object[]> lista =  query.getResultList();
+        List<Object[]> lista = query.getResultList();
         return lista;
-    }   
-    
-    public Object contadorCasosEstadoGeneral(String estadoCaso, String anho, String mes){
+    }
+
+    public Object contadorCasosEstadoGeneral(String estadoCaso, String anho, String mes) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT COUNT(A.N_ID_CASO) TOTAL FROM SIMCO_REPORTE_CASO A ");
         sb.append("INNER JOIN SIMCO_REPORTE_CODIGO B ON A.N_ID_CODIGOCARGA = B.N_ID_REPORTE AND B.C_ANHO||B.C_MES = TO_CHAR(SYSDATE, 'YYMM') AND B.C_IND_ACTIVO = 'A'  ");
@@ -449,8 +450,8 @@ sb.append("WHERE A.C_TIPO = 'AC' AND B.N_ID_ACTOR = ? ");
         Object contador = query.getSingleResult();
         return contador;
     }
-    
-    public Object contadorActaAcuerdo(Long idActividad){
+
+    public Object contadorActaAcuerdo(Long idActividad) {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT COUNT(A.N_ID_ACUERDO) FROM SIMCO_REG_DET_ACTA_ACUERDO A ");
         sb.append("INNER JOIN SIMCO_REG_ACTA_ACUERDO B ON A.N_ID_ACTA = B.N_ID_ACTA  ");
@@ -461,9 +462,89 @@ sb.append("WHERE A.C_TIPO = 'AC' AND B.N_ID_ACTOR = ? ");
         Object contador = query.getSingleResult();
         return contador;
     }
+    
+    public Object[] buscarCaso(Long idCaso) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT A.N_ID_CASO, TO_CHAR(A.D_FECHAPUBLICACION, 'dd/mm/yyyy'), A.C_NOMCASO, ");
+        sb.append("B.C_DESCDPTO, M.C_DESCPROV, N.C_DESCDSTRO, C.NOMBRE_PARAMETRO TIPOCASO, D.NOMBRE_PARAMETRO TIPOESTADO, E.NOMBRE_PARAMETRO TIPOACTIVIDAD, ");
+        sb.append("F.NOMBRE_PARAMETRO FASE, O.C_NOMBRE PRIMERNIVEL, P.C_NOMBRE SEGUNDONIVEL, Q.C_NOMBRE TERCERNIVEL, ");
+        sb.append("R.NOMBRE_PARAMETRO MOMENTO_DIALOGO, S.NOMBRE_PARAMETRO MECANISMO_DIALOGO,  T.NOMBRE_PARAMETRO PARTICIPACION ");
+        sb.append("FROM SIMCO_REPORTE_CASO A ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON A.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A'  ");
+        sb.append("LEFT JOIN SIMCO_UBIGEO_DPTO B ON A.C_IDDEPART = B.C_ID_DPTO   ");
+        sb.append("LEFT JOIN SIMCO_UBIGEO_PROV M ON A.C_IDPROV = M.C_ID_PROV AND B.C_ID_DPTO = M.C_ID_DPTO   ");
+        sb.append("LEFT JOIN SIMCO_UBIGEO_DSTRO N ON A.C_IDDISTR = N.C_ID_DSTRO AND B.C_ID_DPTO = N.C_ID_DPTO AND M.C_ID_PROV = N.C_ID_PROV   ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO C ON C.VALOR_PARAMETRO = A.C_TIPOCASO AND C.PADRE_PARAMETRO = 90   ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO D ON D.VALOR_PARAMETRO = A.C_TIPOESTADO AND D.PADRE_PARAMETRO = 120    ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO E ON E.VALOR_PARAMETRO = A.C_SUBTIPOCASO AND E.PADRE_PARAMETRO = 130  ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO F ON F.VALOR_PARAMETRO = A.C_TIPODIALOGO AND F.PADRE_PARAMETRO = 210   ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO R ON R.VALOR_PARAMETRO = A.C_MOMENTODIALOGO AND R.PADRE_PARAMETRO = 240   ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO S ON S.VALOR_PARAMETRO = A.C_TIPOMECANISMO AND S.PADRE_PARAMETRO = 220   ");
+        sb.append("LEFT JOIN SIMCO_PARAMETRO T ON T.VALOR_PARAMETRO = A.C_TIPOPARTICIPACION AND T.PADRE_PARAMETRO = 230   ");
+        sb.append("LEFT JOIN SIMCO_REG_PRIMER_NIVEL O ON O.C_ID_CODIGOPRIMERO = A.C_PRIMERNIVEL   ");
+        sb.append("LEFT JOIN SIMCO_REG_SEGUNDO_NIVEL P ON P.C_IDCODIGOSEGUNDO = A.C_SEGUNDONIVEL   ");
+        sb.append("LEFT JOIN SIMCO_REG_TERCER_NIVEL Q ON Q.C_ID_CODIGOTERCERO = A.C_TERCERNIVEL ");
+        sb.append("WHERE A.N_ID_CASO = ? ");
+        Query query = em.createNativeQuery(sb.toString());
+        query.setParameter(1, idCaso);
+        List<Object[]> os = query.getResultList();
+        return os.get(0);
+    }
+    
+    public List<Object[]> actividadesPorCaso(Long idCaso) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT A.N_ID_ACTIVIDAD, A.C_TIPO, A.C_NOMACTIVIDAD, C.C_RUTA, C.NOM_USUARIO||' '||C.APE_PATERNO||' '||C.APE_MATERNO, TO_CHAR(A.D_FECHAREALIZACIONINI, 'DD/MM/YYYY'), ");
+        sb.append("A.C_RUTA, TO_CHAR(A.D_FECREGISTRO, 'DD/MM/YYYY'), TO_CHAR(A.D_FECMODIFICACION, 'DD/MM/YYYY'), A.C_DESCRIPACTIVIDAD ");
+        sb.append("FROM SIMCO_REG_ACTIVIDAD A ");
+        sb.append("INNER JOIN SIMCO_REG_CASO_ACTIVIDAD B ON A.N_ID_ACTIVIDAD = B.N_ID_ACTIVIDAD ");
+        sb.append("INNER JOIN SIMCO_SEG_USUARIO C ON A.C_USUREGISTRO = C.CODIGO_USUARIO ");
+        sb.append("WHERE B.C_ESTADOACTCASO = 'ACT' AND B.N_ID_CASO = ? ");
+        sb.append("ORDER BY A.D_FECHAREALIZACIONINI DESC");
+        
+        Query query = em.createNativeQuery(sb.toString());
+        query.setParameter(1, idCaso);
+        List<Object[]> lista = query.getResultList();
+        return lista;
+    }
+    
+    public Object contadorAcontecimientosPorCaso(Long idCaso) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT COUNT(A.N_ID_ACTIVIDAD) FROM SIMCO_REG_ACTIVIDAD A ");
+        sb.append("INNER JOIN SIMCO_REG_CASO_ACTIVIDAD B ON A.N_ID_ACTIVIDAD = B.N_ID_ACTIVIDAD ");
+        sb.append("WHERE B.C_ESTADOACTCASO = 'ACT' AND A.C_TIPO = 'AC' AND B.N_ID_CASO = ? ");
+        Query query = em.createNativeQuery(sb.toString());
+        query.setParameter(1, idCaso);
+        Object contador = query.getSingleResult();
+        return contador;
+    }
+    
+    public Object contadorActuacionesDefensorialesPorCaso(Long idCaso) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT COUNT(A.N_ID_ACTIVIDAD) FROM SIMCO_REG_ACTIVIDAD A ");
+        sb.append("INNER JOIN SIMCO_REG_CASO_ACTIVIDAD B ON A.N_ID_ACTIVIDAD = B.N_ID_ACTIVIDAD ");
+        sb.append("WHERE B.C_ESTADOACTCASO = 'ACT' AND A.C_TIPO = 'AD' AND B.N_ID_CASO = ? ");
+        Query query = em.createNativeQuery(sb.toString());
+        query.setParameter(1, idCaso);
+        Object contador = query.getSingleResult();
+        return contador;
+    }
 
-        
-        
-        
-
+    public List<Object[]> buscarActorPorCaso(Long idCaso) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT A.N_ID_CASO, A.N_ID_ACTOR, CASE WHEN A.C_TIPO = '01' THEN 'Primario' WHEN A.C_TIPO = '02' THEN 'Secundario' WHEN A.C_TIPO = '03' THEN 'Terciario' ELSE ' ' END TIPOACTOR, ");
+        sb.append("A.C_ESTADO, A.D_FECREGISTRO, B.C_NOMACTOR, B.C_APELLIDOPATACTOR, B.C_APELLIDOMATACTOR , B.C_TIPOGENERAL  ");
+        sb.append("FROM (SELECT A1.* FROM SIMCO_REPORTE_CASO_ACTOR A1 ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON A1.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A' ) A ");
+        sb.append("INNER JOIN (SELECT B1.* FROM SIMCO_REPORTE_ACTOR B1 ");
+        sb.append("INNER JOIN SIMCO_REPORTE_CODIGO X ON B1.N_ID_CODIGOCARGA = X.N_ID_REPORTE AND X.C_ANHO = TO_CHAR(SYSDATE,'YY') AND X.C_MES = TO_CHAR(SYSDATE, 'MM') AND X.C_IND_ACTIVO = 'A' ) B ");
+        sb.append("ON A.N_ID_ACTOR = B.N_ID_ACTOR ");
+        sb.append("WHERE A.N_ID_CASO= ? AND A.C_ESTADO = 'ACT' ");
+        sb.append("ORDER BY A.C_TIPO, B.C_NOMACTOR ");
+        Query query = em.createNativeQuery(sb.toString());
+        query.setParameter(1, idCaso);
+        List<Object[]> lista = query.getResultList();
+        return lista;
+    }
+    
+    
 }

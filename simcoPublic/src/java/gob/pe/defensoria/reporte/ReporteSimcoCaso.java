@@ -98,6 +98,8 @@ public class ReporteSimcoCaso {
     private Integer cantidadHeridoFFAA;
     
     private Double inversionInvolucrada;
+    
+    private String fechaPublicacion;
 
     public String getCodigoCaso() {
         return codigoCaso;
@@ -449,6 +451,14 @@ public class ReporteSimcoCaso {
 
     public void setInversionInvolucrada(Double inversionInvolucrada) {
         this.inversionInvolucrada = inversionInvolucrada;
+    }
+
+    public String getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(String fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
     }
     
 }
