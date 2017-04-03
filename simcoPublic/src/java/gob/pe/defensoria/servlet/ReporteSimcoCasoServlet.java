@@ -156,7 +156,7 @@ public class ReporteSimcoCasoServlet extends HttpServlet {
             i++;
             sb.append("<tr>");
             sb.append("<td>").append(i).append("</td>");
-            sb.append("<td><a onclick='verFicha("+rsa.getIdCaso()+")'>").append(rsa.getNombreCaso()).append("<a></td>");
+            sb.append("<td><a onclick='verFicha("+rsa.getIdCaso()+")'><b>").append(rsa.getNombreCaso()).append("</b></a></td>");
             sb.append("<td>").append(rsa.getFechaInicioCaso()).append("</td>");
             sb.append("<td>").append(rsa.getRegionPrincial()).append("</td>");
             sb.append("<td>").append(rsa.getTipologia()).append("</td>");

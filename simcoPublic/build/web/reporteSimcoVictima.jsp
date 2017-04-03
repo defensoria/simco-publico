@@ -709,7 +709,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <h4>Contacto</h4>
-                    <span style="font-size: 90%">Si tienes información adicional sobre algún conflicto social que se encuentre registrado en el reporte y deseas compartir esa información con nosotros, o si conoces de algún conflicto social que podría ser atendido por la Defensoría del Pueblo, tienes varias maneras de comunicarte con nosotros:</span>
+                    <p style="font-size: 110%">Si tienes información adicional sobre algún conflicto social que se encuentre registrado en el reporte y deseas compartir esa información con nosotros, o si conoces de algún conflicto social que podría ser atendido por la Defensoría del Pueblo, tienes varias maneras de comunicarte con nosotros:</p>
                     <ul>
                         <li>
                             <div class="extcolunm1"><i class="fa fa-arrow-right tazul"></i></div>

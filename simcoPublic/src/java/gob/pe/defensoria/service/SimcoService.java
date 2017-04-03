@@ -15,7 +15,6 @@ import gob.pe.defensoria.reporte.ReporteSimcoVictima;
 import gob.pe.defensoria.servlet.Filtro;
 import gob.pe.defensoria.type.AnhosEnum;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -319,8 +318,8 @@ public class SimcoService {
         Object[] obj = simcoFacade.buscarCaso(idCaso);
         ReporteSimcoCaso rsc = new ReporteSimcoCaso();
         rsc.setIdCaso(Long.parseLong(obj[0].toString()));
-        rsc.setFechaPublicacion(obj[1].toString());
-        rsc.setNombreCaso(obj[2].toString());
+        rsc.setFechaPublicacion(obj[1] == null? "": obj[1].toString());
+        rsc.setNombreCaso(obj[2] == null? "": obj[2].toString());
         rsc.setRegionPrincial(obj[3] == null? "": obj[3].toString());
         rsc.setProvinciaPrincial(obj[4] == null? "": obj[4].toString());
         rsc.setDistritoPrincial(obj[5] == null? "": obj[5].toString());
@@ -365,14 +364,14 @@ public class SimcoService {
         for (Object[] obj : listaReporteActividad) {
             ReporteSimcoActividad actividad = new ReporteSimcoActividad();
             actividad.setIdActividad(Long.parseLong(obj[0].toString()));
-            actividad.setTipoActividad(obj[1].toString());
-            actividad.setNombreActividad(obj[2].toString());
+            actividad.setTipoActividad(obj[1] == null? "" :obj[1].toString());
+            actividad.setNombreActividad(obj[2] == null? "" :obj[2].toString());
             actividad.setRutaUsuarioRegistro(obj[3] == null? "" :obj[3].toString());
-            actividad.setUsuarioRegistro(obj[4].toString());
-            actividad.setFechaInicio(obj[5].toString());
+            actividad.setUsuarioRegistro(obj[4] == null? "" :obj[4].toString());
+            actividad.setFechaInicio(obj[5] == null? "" :obj[5].toString());
             actividad.setRuta(obj[6] == null? "" :obj[6].toString());
-            actividad.setFechaRegistro(obj[7].toString());
-            actividad.setFechaModificacion(obj[8].toString());
+            actividad.setFechaRegistro(obj[7] == null? "" :obj[7].toString());
+            actividad.setFechaModificacion(obj[8] == null? "" :obj[8].toString());
             actividad.setDescripcion(obj[9] == null? "" :obj[9].toString());
             lista.add(actividad);
         }

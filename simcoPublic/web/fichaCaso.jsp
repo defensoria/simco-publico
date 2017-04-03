@@ -90,7 +90,7 @@
                 <div role="tabpanel" class="tab-pane active" >
                     <div class="chat-panel panel panel-default">
                         <div class="panel-heading">
-                            <i style="font-size: 2em" class="fa fa-clock-o fa-fw"></i> 
+                            <i style="font-size: 2em" class="fa fa-book fa-fw"></i> 
                             <span style="font-size: 2em">Ficha del caso</span>
                         </div>
                         <!-- /.panel-heading -->
@@ -283,7 +283,7 @@
                                                                     </c:if>
                                                                 </td>
                                                                 <td>
-                                                                    <span style="color:black; text-align: justify; font-size: 1.2em;  vertical-align: top;">Detalle: ${actividad.descripcion}</span>
+                                                                    <p style="color:black; text-align: justify; font-size: 1.2em;  vertical-align: top;">Detalle: ${actividad.descripcion}</p>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -328,7 +328,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <h4>Contacto</h4>
-                    <span style="font-size: 90%">Si tienes información adicional sobre algún conflicto social que se encuentre registrado en el reporte y deseas compartir esa información con nosotros, o si conoces de algún conflicto social que podría ser atendido por la Defensoría del Pueblo, tienes varias maneras de comunicarte con nosotros:</span>
+                    <p style="font-size: 110%">Si tienes información adicional sobre algún conflicto social que se encuentre registrado en el reporte y deseas compartir esa información con nosotros, o si conoces de algún conflicto social que podría ser atendido por la Defensoría del Pueblo, tienes varias maneras de comunicarte con nosotros:</p>
                     <ul>
                         <li>
                             <div class="extcolunm1"><i class="fa fa-arrow-right tazul"></i></div>

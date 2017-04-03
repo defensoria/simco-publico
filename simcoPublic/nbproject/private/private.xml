@@ -6,9 +6,10 @@
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/src/java/gob/pe/defensoria/service/SimcoService.java</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/src/java/gob/pe/defensoria/ejb/SimcoFacade.java</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/web/fichaCaso.jsp</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/web/css/timeline.css</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/src/java/gob/pe/defensoria/reporte/ReporteSimcoActividad.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/web/reporteSimcoActividad.jsp</file>
             <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/src/java/gob/pe/defensoria/servlet/ReporteSimcoCasoServlet.java</file>
+            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/src/java/gob/pe/defensoria/reporte/ReporteSimcoActor.java</file>
         </group>
     </open-files>
 </project-private>
