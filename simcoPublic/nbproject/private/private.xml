@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/src/java/gob/pe/defensoria/service/SimcoService.java</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/src/java/gob/pe/defensoria/ejb/SimcoFacade.java</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/web/fichaCaso.jsp</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/src/java/gob/pe/defensoria/reporte/ReporteSimcoActividad.java</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/web/reporteSimcoActividad.jsp</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/src/java/gob/pe/defensoria/servlet/ReporteSimcoCasoServlet.java</file>
-            <file>file:/C:/Users/carlos/Documents/NetBeansProjects/simco-publico/simcoPublic/src/java/gob/pe/defensoria/reporte/ReporteSimcoActor.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

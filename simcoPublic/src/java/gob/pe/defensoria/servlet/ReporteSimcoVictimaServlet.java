@@ -278,7 +278,7 @@ public class ReporteSimcoVictimaServlet extends HttpServlet {
         sb.append("<td style='background : #0088CC; color : white; width: 19%'>Apellidos y nombres</td>");
         sb.append("<td style='background : #0088CC; color : white; width: 5%'>Edad</td>");
         sb.append("<td style='background : #0088CC; color : white; width: 5%'>Sexo</td>");
-        sb.append("<td style='background : #0088CC; color : white; width: 13%'>Civil/PNP/FFAA</td>");
+        sb.append("<td style='background : #0088CC; color : white; width: 13%'>Condición</td>");
         }
         
         int i = 0;

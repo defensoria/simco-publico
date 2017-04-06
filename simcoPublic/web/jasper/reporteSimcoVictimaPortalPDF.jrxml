@@ -151,7 +151,7 @@
 					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Apellidos y Nombres]]></text>
+				<text><![CDATA[Nombres y apellidos]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="646" y="38" width="32" height="50" forecolor="#FFFFFF" backcolor="#0066CC" uuid="19547b6f-d1e0-4a18-9634-dfaca9bac411"/>
@@ -172,7 +172,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Civil/ PNP/ FFAA]]></text>
+				<text><![CDATA[Condición]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="38" width="375" height="25" forecolor="#FFFFFF" backcolor="#0066CC" uuid="ec2b2806-12a1-442e-a0dc-d9cc07eaf3aa"/>
