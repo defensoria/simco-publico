@@ -271,7 +271,7 @@
                                                                          <tr>
                                                                 <td style="width: 45%; vertical-align: top">
                                                                     
-                                                                        <img class="img-thumbnail lightbox" src="/filesystem/${actividad.ruta}" height="50%" width="80%"/>
+                                                                        <img class="img-thumbnail lightbox" src="/simcoPublic/DownloadFileServlet?fileName=${actividad.ruta}" height="50%" width="80%"/>
                                                                     
                                                                 </td>
                                                                 <td>

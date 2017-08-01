@@ -311,7 +311,7 @@
                                         <table style="width: 100%">
                                             <tr>
                                                 <td style="padding-right: 8px">
-                                                    <img style="width: 30px" src="/sid/faces/bootstrap/img/warning.png" />
+                                                    <img style="width: 30px" src="imagenes/warning.png" />
                                                 </td>
                                                 <td>
                                                     <b><div id="mensaje" style="font-size: 1.4em" class="text-warning"></div></b>
